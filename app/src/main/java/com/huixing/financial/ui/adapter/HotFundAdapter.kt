@@ -34,9 +34,9 @@ class HotFundAdapter : RecyclerView.Adapter<HotFundAdapter.HotFundViewHolder>() 
     }
 
     fun addRankList(rankList: List<Rank>) {
-        val previous = items.size
+        items.clear()
         items.addAll(rankList)
-        notifyItemRangeChanged(previous, rankList.size)
+        notifyDataSetChanged()
     }
 
     class HotFundViewHolder(val binding: HotfundItemLayoutBinding) :
