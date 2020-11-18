@@ -22,11 +22,10 @@ class MainViewModel @ViewModelInject constructor(
         isLoading.set(true)
         viewModelScope.launch {
             mainRepo.fetchHotFund({
-                isLoading.set(false)
             }, {
-                toastData.value = it
-                isLoading.set(false)
+                toastData.postValue(it)
             }).collect {
+                isLoading.set(false)
                 hotFundData.value = it
             }
         }
