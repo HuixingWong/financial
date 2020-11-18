@@ -1,6 +1,5 @@
 package com.huixing.financial.ui.main
 
-import androidx.databinding.ObservableBoolean
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,17 +14,18 @@ class MainViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     var hotFundData = MutableLiveData<HotFund>()
-    val isLoading: ObservableBoolean = ObservableBoolean(false)
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val toastData: MutableLiveData<String> = MutableLiveData()
 
     fun fetchHotData() {
-        isLoading.set(true)
+        isLoading.postValue(true)
         viewModelScope.launch {
             mainRepo.fetchHotFund({
             }, {
+                isLoading.postValue(false)
                 toastData.postValue(it)
             }).collect {
-                isLoading.set(false)
+                isLoading.postValue(false)
                 hotFundData.value = it
             }
         }
