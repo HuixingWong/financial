@@ -41,6 +41,9 @@ class MainActivity : DataBindingActivity() {
             }
             return@setOnMenuItemClickListener false
         }
+        sharedViewModel.showSearch.observe(this, {
+            menu.findItem(R.id.search).isVisible = it
+        })
         return true
     }
 
