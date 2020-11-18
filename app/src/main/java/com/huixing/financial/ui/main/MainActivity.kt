@@ -1,16 +1,15 @@
 package com.huixing.financial.ui.main
 
-import android.app.SearchManager
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.widget.SearchView
 import androidx.activity.viewModels
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingActivity
 import com.huixing.financial.base.viewmodel.SharedViewModel
 import com.huixing.financial.databinding.ActivityMainBinding
 import com.huixing.financial.ui.adapter.HotFundAdapter
+import com.huixing.financial.ui.search.SearchFundActivity
 import com.huixing.financial.utils.appViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,12 +33,13 @@ class MainActivity : DataBindingActivity() {
         viewModel.fetchHotData()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
-        (menu?.findItem(R.id.search)?.actionView as SearchView).apply {
-
-
-
+        menu.findItem(R.id.search).setOnMenuItemClickListener {
+            Intent(this, SearchFundActivity::class.java).apply {
+                startActivity(this)
+            }
+            return@setOnMenuItemClickListener false
         }
         return true
     }
