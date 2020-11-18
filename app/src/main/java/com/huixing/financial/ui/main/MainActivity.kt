@@ -1,17 +1,24 @@
 package com.huixing.financial.ui.main
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.widget.SearchView
 import androidx.activity.viewModels
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingActivity
+import com.huixing.financial.base.viewmodel.SharedViewModel
 import com.huixing.financial.databinding.ActivityMainBinding
 import com.huixing.financial.ui.adapter.HotFundAdapter
+import com.huixing.financial.utils.appViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : DataBindingActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by appViewModels()
     private val binding: ActivityMainBinding by binding(R.layout.activity_main)
 
 
@@ -21,8 +28,20 @@ class MainActivity : DataBindingActivity() {
             lifecycleOwner = this@MainActivity
             adapter = HotFundAdapter()
             vm = viewModel
+            svm = sharedViewModel
         }
+        sharedViewModel.syncAllFundData()
         viewModel.fetchHotData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+        (menu?.findItem(R.id.search)?.actionView as SearchView).apply {
+
+
+
+        }
+        return true
     }
 
 }

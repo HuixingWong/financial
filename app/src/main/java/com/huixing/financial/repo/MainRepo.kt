@@ -1,6 +1,5 @@
 package com.huixing.financial.repo
 
-import android.util.Log
 import com.huixing.financial.network.FinancialService
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
@@ -17,7 +16,7 @@ class MainRepo @Inject constructor(
     ) {
 
     suspend fun fetchHotFund(onSuccess: () -> Unit, onError: (String) -> Unit) = flow {
-        financialService.getAllData().suspendOnSuccess {
+        financialService.getHotData().suspendOnSuccess {
             data.whatIfNotNull { response ->
                 if (response.code == 200) {
                     emit(response)

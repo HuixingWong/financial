@@ -7,6 +7,9 @@
             name="vm"
             type="com.huixing.financial.ui.main.MainViewModel" />
         <variable
+            name="svm"
+            type="com.huixing.financial.base.viewmodel.SharedViewModel" />
+        <variable
             name="adapter"
             type="com.huixing.financial.ui.adapter.HotFundAdapter" />
     </data>
