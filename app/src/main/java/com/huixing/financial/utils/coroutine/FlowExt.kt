@@ -1,6 +1,6 @@
 package com.huixing.financial.utils.coroutine
 
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

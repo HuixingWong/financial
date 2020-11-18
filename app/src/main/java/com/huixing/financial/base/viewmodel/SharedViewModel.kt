@@ -21,7 +21,7 @@ class SharedViewModel @ViewModelInject constructor(
             }, onError = {
                 showSearch.postValue(false)
             }).collect {
-                showSearch.value = true
+                showSearch.value = it
             }
         }
     }

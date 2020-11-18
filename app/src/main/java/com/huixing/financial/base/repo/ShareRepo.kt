@@ -33,6 +33,7 @@ class ShareRepo @Inject constructor(
                 }
                 fundDao.insertFundList(allFundList)
                 onSuccess()
+                emit(true)
             }
         }.onError {
             onError(message())
