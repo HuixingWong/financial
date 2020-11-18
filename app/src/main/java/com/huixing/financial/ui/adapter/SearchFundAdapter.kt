@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.huixing.financial.R
 import com.huixing.financial.databinding.BasefundItemLayoutBinding
 import com.huixing.financial.model.BaseFundData
+import com.huixing.financial.ui.detail.FundDetailActivity
 
 class SearchFundAdapter : RecyclerView.Adapter<SearchFundAdapter.SearchFundViewHolder>() {
 
@@ -19,7 +20,9 @@ class SearchFundAdapter : RecyclerView.Adapter<SearchFundAdapter.SearchFundViewH
                 R.layout.basefund_item_layout, parent, false
             )
         return SearchFundViewHolder(binding).apply {
-
+            binding.root.setOnClickListener {
+                FundDetailActivity.startActivity(it, items[adapterPosition].code)
+            }
         }
     }
 

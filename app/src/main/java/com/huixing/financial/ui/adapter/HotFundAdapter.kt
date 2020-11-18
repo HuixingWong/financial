@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.huixing.financial.R
 import com.huixing.financial.databinding.HotfundItemLayoutBinding
 import com.huixing.financial.model.Rank
+import com.huixing.financial.ui.detail.FundDetailActivity
 
 class HotFundAdapter : RecyclerView.Adapter<HotFundAdapter.HotFundViewHolder>() {
 
@@ -19,7 +20,11 @@ class HotFundAdapter : RecyclerView.Adapter<HotFundAdapter.HotFundViewHolder>() 
                 R.layout.hotfund_item_layout, parent, false
             )
         return HotFundViewHolder(binding).apply {
-
+            binding.root.setOnClickListener {
+                items[adapterPosition].code?.let { it1 ->
+                    FundDetailActivity.startActivity(it, it1)
+                }
+            }
         }
     }
 
