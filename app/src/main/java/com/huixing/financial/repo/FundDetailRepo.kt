@@ -1,8 +1,9 @@
 package com.huixing.financial.repo
 
 import com.huixing.financial.network.FinancialService
+import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
-import com.skydoves.whatif.whatIf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -15,13 +16,16 @@ class FundDetailRepo @Inject constructor(
     suspend fun fetchFundDetail(
         code: String,
         startDate: String? = null,
-        endDate: String? = null
+        endDate: String? = null,
+        onError: (String) -> Unit
     ) = flow {
         financialService.getFundDetail(code, startDate, endDate)
             .suspendOnSuccess {
-                data?.whatIf(code.equals(200)) {
-                    emit(this.data)
-                }
+                emit(this.data?.data)
+            }.onError {
+                onError(this.statusCode.code.toString())
+            }.onException {
+                onError(this.message.toString())
             }
     }.flowOn(Dispatchers.IO)
 

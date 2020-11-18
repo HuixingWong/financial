@@ -23,16 +23,15 @@ class FundDetailViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
             isLoading.postValue(true)
-            fundDetailRepo.fetchFundDetail(code, start, end)
-                .catch {
-                    toast.postValue(it.message)
-                }
-                .onCompletion {
-                    isLoading.postValue(false)
-                }
-                .collect {
-                    fundDetailData.postValue(it)
-                }
+            fundDetailRepo.fetchFundDetail(code, start, end) {
+                toast.postValue(it)
+            }.catch {
+                toast.postValue(it.message)
+            }.onCompletion {
+                isLoading.postValue(false)
+            }.collect {
+                fundDetailData.postValue(it)
+            }
         }
 
     }

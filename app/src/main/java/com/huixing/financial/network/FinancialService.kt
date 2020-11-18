@@ -15,7 +15,7 @@ interface FinancialService {
     @GET("v1/fund/all")
     suspend fun getAllBaseData(): ApiResponse<FullFund>
 
-    @GET("detail")
+    @GET("v1/fund/detail?")
     suspend fun getFundDetail(
         @Query("code") code: String,
         @Query("startDate") startDate: String? = null,
