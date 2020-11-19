@@ -62,7 +62,6 @@ class FundDetailViewModel @ViewModelInject constructor(
     private fun calculateByPlan() {
 
 
-
     }
 
     /**
@@ -73,8 +72,8 @@ class FundDetailViewModel @ViewModelInject constructor(
     private fun calculate() {
         viewModelScope.launch {
             isLoading.postValue(true)
-            fundDetailRepo.calculate(fundDetailData.value?.netWorthData!!,
-                    startDate.value, endDate.value) {
+            fundDetailRepo.calculate(startDate.value,
+                    endDate.value) {
                 toast.postValue(it)
             }.catch {
                 toast.postValue(it.message)

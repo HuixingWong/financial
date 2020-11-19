@@ -23,10 +23,10 @@ class FundDetailRepo @Inject constructor(
     ) = flow {
         financialService.getFundDetail(code, startDate, endDate)
                 .suspendOnSuccess {
+                    emit(this.data?.data)
                     this.data?.data?.netWorthData?.forEach {
                         fundMap[it[0]] = it[1]
                     }
-                    emit(this.data?.data)
                 }.onError {
                     onError(this.statusCode.code.toString())
                 }.onException {
@@ -35,21 +35,12 @@ class FundDetailRepo @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    suspend fun calculate(netWorthData: List<List<String>>,
-                          startDate: String?,
+    suspend fun calculate(startDate: String?,
                           endDate: String?,
                           onError: (String) -> Unit) =
             flow {
-                var startValue = -1.0
-                var endValue = -1.0
-                netWorthData.forEach { worthData ->
-                    if (worthData[0] == startDate) {
-                        startValue = worthData[1].toDouble()
-                    } else if (worthData[0] == endDate) {
-                        endValue = worthData[1].toDouble()
-                        return@forEach
-                    }
-                }
+                val startValue = fundMap[startDate]?.toDouble()?: -1.0
+                val endValue = fundMap[endDate]?.toDouble()?: -1.0
                 if (startValue < 0) {
                     onError("开始日期有误")
                     return@flow
