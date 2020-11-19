@@ -9,13 +9,11 @@ import java.util.*
 
 
 object TimeUtil {
-
     fun getDateStr(year: Int, month: Int, day: Int): String {
         val time = Calendar.getInstance().apply { set(year, month, day) }.time
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         return dateFormat.format(time)
     }
-
 }
 
 @SuppressLint("NewApi")
@@ -23,7 +21,17 @@ fun String.toTimestamp(): Long {
     return try {
         val l = LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         l.atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond
-    }catch (e: Exception){
+    } catch (e: Exception) {
         0
     }
+}
+
+@SuppressLint("NewApi")
+fun String.toDate(): LocalDate {
+    return LocalDate.parse(this, DateTimeFormatter.ISO_DATE)
+}
+
+@SuppressLint("NewApi")
+fun LocalDate.toStrDate(): String {
+    return TimeUtil.getDateStr(this.year, this.monthValue, this.dayOfMonth)
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 class FundDetailViewModel @ViewModelInject constructor(
-    private val fundDetailRepo: FundDetailRepo
+        private val fundDetailRepo: FundDetailRepo,
 ) : ViewModel() {
 
     val fundDetailData = MutableLiveData<FundDetailData>()
@@ -29,6 +29,8 @@ class FundDetailViewModel @ViewModelInject constructor(
 
     val resultMoney: MutableLiveData<String> = MutableLiveData()
     val resultRatio: MutableLiveData<String> = MutableLiveData()
+
+    val putAllMoney: MutableLiveData<String> = MutableLiveData()
 
     fun submitEvaluate() {
 
@@ -46,22 +48,26 @@ class FundDetailViewModel @ViewModelInject constructor(
     }
 
     private fun dispatchPlan() {
-        when (radioId.value) {
-            R.id.week -> {
-
-            }
-            R.id.month -> {
-
-            }
-            R.id.year -> {
-
+        if (inputMoney.value == null) {
+            toast.value = "请输入定投金额"
+        }
+        viewModelScope.launch {
+            radioId.value?.let {
+                isLoading.postValue(true)
+                fundDetailRepo.calculateByPlan(
+                        it, startDate.value!!, endDate.value, inputMoney.value!!) { error ->
+                    toast.postValue(error)
+                }.catch { error ->
+                    toast.postValue(error.message)
+                }.onCompletion {
+                    isLoading.postValue(false)
+                }.collect { result ->
+                    putAllMoney.value = result.first.toString()
+                    resultMoney.value = result.second.toString()
+                    resultRatio.value = (result.second / result.first).toString()
+                }
             }
         }
-    }
-
-    private fun calculateByPlan() {
-
-
     }
 
     /**
