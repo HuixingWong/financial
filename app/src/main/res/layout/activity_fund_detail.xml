@@ -27,7 +27,7 @@
                 android:layout_marginTop="@dimen/padding_middle"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_middle">
@@ -84,9 +84,9 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_middle"
@@ -103,6 +103,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:padding="@dimen/padding_middle"
+                            android:hint="startDate"
                             android:text="@={vm.startDate}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -114,6 +115,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/padding_middle"
                             android:padding="@dimen/padding_middle"
+                            android:hint="endDate"
                             android:text="@={vm.endDate}"
                             app:layout_constraintBottom_toBottomOf="@id/startDate"
                             app:layout_constraintStart_toEndOf="@+id/startDate"
@@ -124,6 +126,7 @@
                             android:id="@+id/rg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checkedButton="@={vm.radioId}"
                             android:orientation="horizontal"
                             app:layout_constraintBottom_toBottomOf="@+id/endDate"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -155,35 +158,58 @@
                             android:hint="input initial capital"
                             android:inputType="number"
                             android:paddingVertical="@dimen/padding_large"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/startDate"
+                            android:text="@={vm.inputMoney}"
                             android:tooltipText="总金额或者定投金额"
-                            />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/startDate" />
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="@={vm.usePlan}"
+                            android:text="定投模式"
+                            app:layout_constraintBottom_toBottomOf="@id/moneyInput"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/moneyInput" />
 
                         <Button
                             android:id="@+id/submit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:onClick="@{() -> vm.submitEvaluate()}"
                             android:text="submit"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/moneyInput"
-                            android:onClick="@{() -> vm.submitEvaluate()}"
-                            />
+                            app:layout_constraintTop_toBottomOf="@+id/moneyInput" />
 
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/money"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/padding_middle"
                             android:hint="Benefits evaluation"
                             android:paddingBottom="@dimen/padding_small"
                             app:layout_constraintBottom_toBottomOf="@id/submit"
-                            app:layout_constraintStart_toEndOf="@+id/submit" />
+                            app:layout_constraintStart_toEndOf="@+id/submit"
+                            android:text="@={vm.resultMoney}"
+                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:hint="Earnings ratio"
+                            android:paddingBottom="@dimen/padding_small"
+                            app:layout_constraintBottom_toBottomOf="@id/money"
+                            app:layout_constraintStart_toEndOf="@id/money"
+                            app:layout_constraintTop_toTopOf="@id/money"
+                            android:text="@={vm.resultRatio}"
+                            />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
             </LinearLayout>
