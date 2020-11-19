@@ -17,4 +17,8 @@ interface FundDao {
 
     @Query("SELECT * FROM BaseFundData")
     suspend fun getAllFundList(): List<BaseFundData>
+
+    @Query("SELECT COUNT(*) FROM BaseFundData")
+    suspend fun getDataCount(): Int
+
 }
