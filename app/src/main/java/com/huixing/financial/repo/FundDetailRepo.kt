@@ -3,6 +3,7 @@ package com.huixing.financial.repo
 import android.annotation.SuppressLint
 import com.huixing.financial.R
 import com.huixing.financial.network.FinancialService
+import com.huixing.financial.utils.log
 import com.huixing.financial.utils.toDate
 import com.huixing.financial.utils.toStrDate
 import com.skydoves.sandwich.onError
@@ -16,18 +17,18 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 class FundDetailRepo @Inject constructor(
-        private val financialService: FinancialService
+        private val financialService: FinancialService,
 ) {
 
     private val fundMap = mutableMapOf<String, String>()
-    lateinit var currentDate: String
+    lateinit var mCurrentDate: String
     lateinit var mEndDate: LocalDate
 
     suspend fun fetchFundDetail(
             code: String,
             startDate: String? = null,
             endDate: String? = null,
-            onError: (String) -> Unit
+            onError: (String) -> Unit,
     ) = flow {
         financialService.getFundDetail(code, startDate, endDate)
                 .suspendOnSuccess {
@@ -54,17 +55,19 @@ class FundDetailRepo @Inject constructor(
             inputMoney: String,
             onError: (String) -> Unit,
     ) = flow {
-        currentDate = startDate
-        mEndDate = endDate?.toDate()?: LocalDate.now().minusDays(1)
+        mCurrentDate = startDate
+        mEndDate = endDate?.toDate() ?: LocalDate.now().minusDays(1)
         checkDate(startDate, endDate, onError).collect {
             var resultMoney = inputMoney.toDouble()
             var unitMoney = resultMoney
             var totalPut = resultMoney
-
-            while (currentDate.toDate().isBefore(mEndDate)) {
+            while (mCurrentDate.toDate().isBefore(mEndDate)) {
                 val nextRatio = getNextRatio(id) ?: break
-                resultMoney = resultMoney.times(nextRatio) + unitMoney
-                totalPut += unitMoney
+                resultMoney = resultMoney.times(nextRatio)
+                if (mCurrentDate.toDate().isBefore(mEndDate)) {
+                    resultMoney += unitMoney
+                    totalPut += unitMoney
+                }
             }
             emit(Pair(totalPut, resultMoney))
         }
@@ -74,25 +77,28 @@ class FundDetailRepo @Inject constructor(
     @SuppressLint("NewApi")
     fun getNextRatio(id: Int): Double? {
 
-        val thisStart = getAvailableDateLatest(currentDate)
-        var date = when (id) {
+        val valueStart = getAvailableDateLatest(mCurrentDate)
+        mCurrentDate = when (id) {
             R.id.week -> {
-                currentDate.toDate().plusWeeks(1)
+                mCurrentDate.toDate().minusMonths(1).plusWeeks(1)
             }
             R.id.month -> {
-                currentDate.toDate().plusMonths(1)
+                mCurrentDate.toDate()
             }
             R.id.year -> {
-                currentDate.toDate().plusYears(1)
+                mCurrentDate.toDate().minusMonths(1).plusYears(1)
             }
             else -> LocalDate.MIN
-        }
-        currentDate = date.toStrDate()
-        var available = getAvailableDateLatest(currentDate)
-        return if (thisStart == null || available == null){
+        }.toStrDate()
+        log(message = "🧮得到的 $mCurrentDate")
+        val valueEnd = getAvailableDateLatest(mCurrentDate)
+        log("" +
+                "=====================" +
+                "")
+        return if (valueStart == null || valueEnd == null) {
             null
         } else {
-            fundMap[thisStart]?.toDouble()?.let { fundMap[available]?.toDouble()?.div(it) }
+            valueEnd.toDouble().div(valueStart.toDouble())
         }
     }
 
@@ -112,23 +118,25 @@ class FundDetailRepo @Inject constructor(
                 }
             }
         }
-        return available
+        log("🉑️可用的： $available")
+        return fundMap[available]
     }
 
     @SuppressLint("NewApi")
     fun getBeforeDayUntilAvailable(currentDate: String): String {
         var date = currentDate
-        while (!fundMap.containsKey(date)){
-           date = date.toDate().minusDays(1).toStrDate()
+        while (!fundMap.containsKey(date)) {
+            date = date.toDate().minusDays(1).toStrDate()
         }
-       return date
+        return date
     }
 
 
-
-    suspend fun calculate(startDate: String?,
-                          endDate: String?,
-                          onError: (String) -> Unit) =
+    suspend fun calculate(
+            startDate: String?,
+            endDate: String?,
+            onError: (String) -> Unit,
+    ) =
             flow {
                 checkDate(startDate, endDate, onError).collect {
                     emit(it.second / it.first)
@@ -136,21 +144,23 @@ class FundDetailRepo @Inject constructor(
             }.flowOn(Dispatchers.IO)
 
 
-    private fun checkDate(startDate: String?,
-                          endDate: String?,
-                          onError: (String) -> Unit) =
+    private fun checkDate(
+            startDate: String?,
+            endDate: String?,
+            onError: (String) -> Unit,
+    ) =
             flow {
-        val startValue = fundMap[startDate]?.toDouble()?: -1.0
-        val endValue = fundMap[endDate]?.toDouble()?: -1.0
-        if (startValue < 0) {
-            onError("开始日期有误")
-            return@flow
-        }
-        if (endValue < 0) {
-            onError("结束日期日期有误")
-            return@flow
-        }
-        emit(Pair(startValue, endValue))
-    }
+                val startValue = fundMap[startDate]?.toDouble() ?: -1.0
+                val endValue = fundMap[endDate]?.toDouble() ?: -1.0
+                if (startValue < 0) {
+                    onError("开始日期有误")
+                    return@flow
+                }
+                if (endValue < 0) {
+                    onError("结束日期日期有误")
+                    return@flow
+                }
+                emit(Pair(startValue, endValue))
+            }
 
 }
