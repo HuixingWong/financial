@@ -1,14 +1,15 @@
 package com.huixing.financial.binding
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.os.Build
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import com.huixing.financial.utils.TimeUtil
+import com.huixing.financial.utils.toDate
 import com.skydoves.whatif.whatIfNotNullOrEmpty
+import java.time.LocalDate
 
 object ViewBinding {
 
@@ -30,18 +31,19 @@ object ViewBinding {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("NewApi")
     @JvmStatic
     @BindingAdapter("pickDate")
     fun bindPickDate(view: View, backToView: Boolean) {
         view.setOnClickListener {
-            DatePickerDialog(view.context).apply {
-                setOnDateSetListener { _, year, month, dayOfMonth ->
-                    if (backToView) {
-                        (view as? TextView)?.text = TimeUtil.getDateStr(year,month,dayOfMonth)
-                    }
+            val date = kotlin.runCatching {
+                (view as? TextView)?.text?.toString()?.toDate()
+            }.getOrNull() ?: LocalDate.now()
+            DatePickerDialog(view.context, { _, year, month, dayOfMonth ->
+                if (backToView) {
+                    (view as? TextView)?.text = TimeUtil.getDateStr(year, month, dayOfMonth)
                 }
-            }.show()
+            }, date.year, date.monthValue - 1, date.dayOfMonth).show()
         }
     }
 
