@@ -24,6 +24,9 @@ android {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
             }
         }
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        buildConfigField "String", "ACCESS_TOKEN", properties.getProperty("ACCESS_TOKEN")
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
