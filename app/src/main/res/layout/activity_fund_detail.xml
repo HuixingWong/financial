@@ -63,23 +63,70 @@
                             app:layout_constraintBottom_toBottomOf="@id/code"
                             app:layout_constraintStart_toEndOf="@id/code"
                             app:layout_constraintTop_toTopOf="@id/code" />
+
                         <TextView
                             android:id="@+id/yearUpdate"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/code"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:gravity="center"
                             android:text="@{vm.fundDetailData.lastYearGrowth}"
                             android:textSize="30dp"
-                            />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/code"
+                            app:layout_constraintWidth_percent="0.3" />
+
                         <TextView
                             android:id="@+id/yearTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintStart_toStartOf="@id/yearUpdate"
-                            app:layout_constraintTop_toBottomOf="@+id/yearUpdate"
                             android:text="近一年涨幅"
-                            />
+                            app:layout_constraintEnd_toEndOf="@+id/yearUpdate"
+                            app:layout_constraintStart_toStartOf="@id/yearUpdate"
+                            app:layout_constraintTop_toBottomOf="@+id/yearUpdate" />
+
+                        <TextView
+                            android:id="@+id/dayUpdate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:text="@{vm.fundDetailData.dayGrowth}"
+                            android:textSize="30dp"
+                            app:layout_constraintBottom_toBottomOf="@id/yearUpdate"
+                            app:layout_constraintStart_toEndOf="@+id/yearUpdate"
+                            app:layout_constraintTop_toTopOf="@+id/yearUpdate"
+                            app:layout_constraintWidth_percent="0.3" />
+
+                        <TextView
+                            android:id="@+id/dayTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  昨日涨幅   "
+                            app:layout_constraintEnd_toEndOf="@+id/dayUpdate"
+                            app:layout_constraintStart_toStartOf="@id/dayUpdate"
+                            app:layout_constraintTop_toBottomOf="@+id/dayUpdate" />
+
+                        <TextView
+                            android:id="@+id/monthUpdate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:text="@{vm.fundDetailData.lastMonthGrowth}"
+                            android:textSize="30dp"
+                            app:layout_constraintBottom_toBottomOf="@id/dayUpdate"
+                            app:layout_constraintStart_toEndOf="@+id/dayUpdate"
+                            app:layout_constraintTop_toTopOf="@+id/dayUpdate"
+                            app:layout_constraintWidth_percent="0.3" />
+
+                        <TextView
+                            android:id="@+id/monthTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  月涨幅   "
+                            app:layout_constraintEnd_toEndOf="@+id/monthUpdate"
+                            app:layout_constraintStart_toStartOf="@id/monthUpdate"
+                            app:layout_constraintTop_toBottomOf="@+id/monthUpdate" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
