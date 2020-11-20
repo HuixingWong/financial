@@ -19,7 +19,10 @@ class FundDetailActivity : DataBindingActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = resources.getString(R.string.fund_detail)
-        intent.getStringExtra(FUND_CODE)?.let { fundDetailViewModel.fetchFundDetail(it) }
+        intent.getStringExtra(FUND_CODE)?.let {
+            fundDetailViewModel.fetchFundDetail(it)
+            intent.removeExtra(FUND_CODE)
+        }
         binding.apply {
             lifecycleOwner = this@FundDetailActivity
             vm = fundDetailViewModel
