@@ -33,5 +33,5 @@ fun String.toDate(): LocalDate {
 
 @SuppressLint("NewApi")
 fun LocalDate.toStrDate(): String {
-    return TimeUtil.getDateStr(this.year, this.monthValue, this.dayOfMonth)
+    return TimeUtil.getDateStr(this.year, this.month.ordinal, this.dayOfMonth)
 }

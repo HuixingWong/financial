@@ -80,13 +80,13 @@ class FundDetailRepo @Inject constructor(
         val valueStart = getAvailableDateLatest(mCurrentDate)
         mCurrentDate = when (id) {
             R.id.week -> {
-                mCurrentDate.toDate().minusMonths(1).plusWeeks(1)
+                mCurrentDate.toDate().plusWeeks(1)
             }
             R.id.month -> {
-                mCurrentDate.toDate()
+                mCurrentDate.toDate().plusMonths(1)
             }
             R.id.year -> {
-                mCurrentDate.toDate().minusMonths(1).plusYears(1)
+                mCurrentDate.toDate().plusYears(1)
             }
             else -> LocalDate.MIN
         }.toStrDate()
