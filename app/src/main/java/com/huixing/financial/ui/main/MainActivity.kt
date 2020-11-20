@@ -45,4 +45,8 @@ class MainActivity : DataBindingActivity() {
         return true
     }
 
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
+
 }
