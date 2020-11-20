@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.huixing.financial.R
 import com.huixing.financial.model.FundDetailData
 import com.huixing.financial.repo.FundDetailRepo
+import com.huixing.financial.utils.toStrDate
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class FundDetailViewModel @ViewModelInject constructor(
         private val fundDetailRepo: FundDetailRepo,
@@ -20,9 +22,13 @@ class FundDetailViewModel @ViewModelInject constructor(
     val isLoading = MutableLiveData<Boolean>()
     val toast = MutableLiveData<String>()
 
-    val startDate: MutableLiveData<String> = MutableLiveData()
-    val endDate: MutableLiveData<String> = MutableLiveData()
-    val inputMoney: MutableLiveData<String> = MutableLiveData()
+    val startDate: MutableLiveData<String>
+            = MutableLiveData(LocalDate.now().minusMonths(1).toStrDate())
+
+    val endDate: MutableLiveData<String> =
+        MutableLiveData(LocalDate.now().minusDays(1).toStrDate())
+
+    val inputMoney: MutableLiveData<String> = MutableLiveData(100.toString())
 
     val radioId: MutableLiveData<Int> = MutableLiveData(R.id.week)
     val usePlan: MutableLiveData<Boolean> = MutableLiveData(false)
