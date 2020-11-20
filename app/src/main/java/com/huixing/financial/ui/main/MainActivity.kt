@@ -29,8 +29,6 @@ class MainActivity : DataBindingActivity() {
             vm = viewModel
             svm = sharedViewModel
         }
-        sharedViewModel.syncAllFundData()
-        viewModel.fetchHotData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -17,6 +17,10 @@ class MainViewModel @ViewModelInject constructor(
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val toastData: MutableLiveData<String> = MutableLiveData()
 
+    init {
+        fetchHotData()
+    }
+
     fun fetchHotData() {
         isLoading.postValue(true)
         viewModelScope.launch {

@@ -14,6 +14,10 @@ class SharedViewModel @ViewModelInject constructor(
 
     val showSearch = MutableLiveData(false)
 
+    init {
+        syncAllFundData()
+    }
+
     fun syncAllFundData() {
         viewModelScope.launch {
             shareRepo.getAllDataAndSave(onSuccess = {
