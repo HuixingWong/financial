@@ -1,6 +1,7 @@
 package com.huixing.financial.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
@@ -18,6 +19,6 @@ data class FullFund(
 @Parcelize
 data class BaseFundData(
         @PrimaryKey
-        val code: String,
-        val name: String
+        @ColumnInfo(name = "code") val code: String,
+        @ColumnInfo(name = "name") val name: String
 ) : Parcelable
