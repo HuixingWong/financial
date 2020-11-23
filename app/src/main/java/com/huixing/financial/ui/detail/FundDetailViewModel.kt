@@ -1,21 +1,24 @@
 package com.huixing.financial.ui.detail
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.R
 import com.huixing.financial.model.FundDetailData
 import com.huixing.financial.repo.FundDetailRepo
 import com.huixing.financial.utils.toStrDate
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class FundDetailViewModel @ViewModelInject constructor(
+class FundDetailViewModel @AssistedInject constructor(
         private val fundDetailRepo: FundDetailRepo,
+        @Assisted private val fundCode: String
 ) : ViewModel() {
 
     val fundDetailData = MutableLiveData<FundDetailData>()
@@ -37,6 +40,11 @@ class FundDetailViewModel @ViewModelInject constructor(
     val resultRatio: MutableLiveData<String> = MutableLiveData()
 
     val putAllMoney: MutableLiveData<String> = MutableLiveData()
+
+
+    init {
+        fetchFundDetail(fundCode)
+    }
 
     fun submitEvaluate() {
 
@@ -101,7 +109,7 @@ class FundDetailViewModel @ViewModelInject constructor(
     }
 
 
-    fun fetchFundDetail(code: String, start: String? = null, end: String? = null) {
+    private fun fetchFundDetail(code: String, start: String? = null, end: String? = null) {
 
         viewModelScope.launch {
             isLoading.postValue(true)
@@ -118,5 +126,21 @@ class FundDetailViewModel @ViewModelInject constructor(
 
     }
 
+    @AssistedInject.Factory
+    interface AssistedFactory {
+        fun create(fundCode: String): FundDetailViewModel
+    }
+
+    companion object {
+        fun provideFactory(
+            assistedFactory: AssistedFactory,
+            fundCode: String
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return assistedFactory.create(fundCode) as T
+            }
+        }
+    }
 
 }

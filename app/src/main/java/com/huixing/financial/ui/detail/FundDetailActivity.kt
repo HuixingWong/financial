@@ -9,20 +9,25 @@ import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingActivity
 import com.huixing.financial.databinding.ActivityFundDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FundDetailActivity : DataBindingActivity() {
 
-    private val fundDetailViewModel: FundDetailViewModel by viewModels()
+    @Inject
+    lateinit var fundViewModelFactory: FundDetailViewModel.AssistedFactory
+
+    private val fundDetailViewModel: FundDetailViewModel by viewModels {
+        FundDetailViewModel.provideFactory(
+            fundViewModelFactory,
+            intent?.getStringExtra(FUND_CODE) ?: ""
+        )
+    }
     private val binding by binding<ActivityFundDetailBinding>(R.layout.activity_fund_detail)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = resources.getString(R.string.fund_detail)
-        intent.getStringExtra(FUND_CODE)?.let {
-            fundDetailViewModel.fetchFundDetail(it)
-            intent.removeExtra(FUND_CODE)
-        }
         binding.apply {
             lifecycleOwner = this@FundDetailActivity
             vm = fundDetailViewModel
@@ -37,4 +42,5 @@ class FundDetailActivity : DataBindingActivity() {
             (view.context as? Activity)?.startActivity(intent)
         }
     }
+
 }
