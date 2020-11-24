@@ -144,6 +144,13 @@ dependencies {
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
 
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.nav_version"
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$versions.nav_version"
+
+
     // unit test
     testImplementation "junit:junit:$versions.junitVersion"
     testImplementation "androidx.test:core:$versions.androidxTest"

@@ -1,6 +1,5 @@
 package com.huixing.financial.ui.detail
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -39,7 +38,7 @@ class FundDetailActivity : DataBindingActivity() {
         fun startActivity(view: View, fundCode: String) {
             val intent = Intent(view.context, FundDetailActivity::class.java)
             intent.putExtra(FUND_CODE, fundCode)
-            (view.context as? Activity)?.startActivity(intent)
+            view.context?.startActivity(intent)
         }
     }
 

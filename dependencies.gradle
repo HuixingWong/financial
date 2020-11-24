@@ -68,6 +68,11 @@ ext.versions = [
     // debugging
     timberVersion        : '4.7.1',
 
+
+    //navigation
+
+    nav_version          :"2.3.1",
+
     // unit test
     truthVersion         : '1.0.1',
     junitVersion         : '4.13.1',
