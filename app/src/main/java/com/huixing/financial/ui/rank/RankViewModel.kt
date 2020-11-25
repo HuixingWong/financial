@@ -17,10 +17,11 @@ class RankViewModel @ViewModelInject constructor(
 
     val toast = MutableLiveData<String>()
     val rankData = MutableLiveData<HotFund>()
+    val rankParam = MutableLiveData(RankParam())
 
-    fun fetchRankData(rankParams: RankParam) {
+    fun fetchRankData() {
         viewModelScope.launch {
-            rankRepo.fetchRankData(rankParams) {
+            rankRepo.fetchRankData(rankParam = rankParam.value!!) {
                 toast.postValue(it)
             }.catch {
                 toast.postValue(it.message)
