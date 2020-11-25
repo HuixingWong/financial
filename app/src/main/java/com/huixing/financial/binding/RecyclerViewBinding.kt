@@ -12,7 +12,7 @@ object RecyclerViewBinding {
 
     @JvmStatic
     @BindingAdapter("adapterHotFundList")
-    fun bindAdapterPokemonList(view: RecyclerView, rankList: List<Rank>?) {
+    fun bindHotFundList(view: RecyclerView, rankList: List<Rank>?) {
         rankList.whatIfNotNullOrEmpty {
             (view.adapter as? HotFundAdapter)?.addRankList(it)
         }
@@ -21,7 +21,7 @@ object RecyclerViewBinding {
 
     @JvmStatic
     @BindingAdapter("adapterSearchFundList")
-    fun bindSearchPokemonList(view: RecyclerView, rankList: List<BaseFundData>?) {
+    fun bindSearchFundList(view: RecyclerView, rankList: List<BaseFundData>?) {
         rankList.whatIfNotNullOrEmpty {
             (view.adapter as? SearchFundAdapter)?.addList(it)
         }
