@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/grp_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="test" />
+    </group>
+
+    <group
+        android:id="@+id/grp_2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/panierFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="test" />
+        <item
+            android:id="@+id/categoryFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="test" />
+    </group>
+
+
+    <group
+        android:id="@+id/grp_5"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/settingFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="test"/>
+        <item
+            android:id="@+id/aboutFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="test" />
+    </group>
+
+</menu>
