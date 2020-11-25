@@ -1,14 +1,17 @@
 package com.huixing.financial.model.request
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class RankParam(
         val fundType: Array<String> = arrayOf("gp", "hh", "zq", "zs", "qdii", "fof"),
         val sort: String = "r",
         val fundCompany: String? = null,
-        val creatTimeLimit:Number? = null,
-        val fundScale: Number? = null,
-        val asc: Number? = null,
-        val pageIndex: Number? = null,
-        val pageSize: Number?= null
+        val creatTimeLimit:Long? = null,
+        val fundScale: Int? = null,
+        val asc: Int? = null,
+        val pageIndex: Int? = null,
+        val pageSize: Int?= 20
 ) {
 
 

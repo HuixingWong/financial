@@ -5,10 +5,7 @@ import com.huixing.financial.model.FundDetail
 import com.huixing.financial.model.HotFund
 import com.huixing.financial.model.request.RankParam
 import com.skydoves.sandwich.ApiResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface FinancialService {
 
@@ -26,7 +23,8 @@ interface FinancialService {
     ): ApiResponse<FundDetail>
 
     // data is same as the hot data
-    @POST("v1/fund/rank?")
-    suspend fun fetchRankData(@Body rankParam: RankParam): ApiResponse<HotFund>
+    @Headers("Content-Type: application/json")
+    @POST("v1/fund/rank")
+    suspend fun fetchRankData(@Body rankParam: String): ApiResponse<HotFund>
 
 }
