@@ -19,6 +19,7 @@ class SearchFundActivity : DataBindingActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = resources.getString(R.string.fund_search)
         binding.apply {
             lifecycleOwner = this@SearchFundActivity
             vm = searchViewModel

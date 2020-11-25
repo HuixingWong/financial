@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val sharedViewModel: SharedViewModel by appViewModels()
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
         supportActionBar?.setDisplayShowHomeEnabled(true)
         val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController, drawer_layout)
         NavigationUI.setupWithNavController(nav_view, navController)
         nav_view.setNavigationItemSelectedListener(this)
@@ -53,12 +55,24 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
+    //this enable drawer and close
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, drawer_layout)
+    }
+
 
     override fun onBackPressed() {
         moveTaskToBack(true)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        item.isChecked = true
+        drawer_layout.closeDrawers()
+        when (item.itemId) {
+            R.id.rankActivity -> {
+                navController.navigate(R.id.action_mainFragment_to_rankActivity)
+            }
+        }
         return true
     }
 

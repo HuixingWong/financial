@@ -8,6 +8,15 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.huixing.financial.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_rankActivity"
+            app:destination="@id/rankActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/rankActivity"
+        android:name="com.huixing.financial.ui.rank.RankActivity"
+        android:label="Hilt_RankActivity" />
 
 </navigation>

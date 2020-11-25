@@ -6,9 +6,9 @@
         android:id="@+id/grp_1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/homeFragment"
+            android:id="@+id/rankActivity"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="test" />
+            android:title="rank" />
     </group>
 
     <group
@@ -26,17 +26,5 @@
     </group>
 
 
-    <group
-        android:id="@+id/grp_5"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/settingFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="test"/>
-        <item
-            android:id="@+id/aboutFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="test" />
-    </group>
 
 </menu>
