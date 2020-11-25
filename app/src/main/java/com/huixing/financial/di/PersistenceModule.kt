@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.huixing.financial.persistence.AppDatabase
 import com.huixing.financial.persistence.FundDao
+import com.huixing.financial.utils.moshi
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ object PersistenceModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi {
-        return Moshi.Builder().build()
+        return moshi
     }
 
     @Provides
