@@ -15,7 +15,9 @@
         <activity android:name=".ui.rank.RankActivity"></activity>
         <activity android:name=".ui.detail.FundDetailActivity" />
         <activity android:name=".ui.search.SearchFundActivity" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.Financial.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
