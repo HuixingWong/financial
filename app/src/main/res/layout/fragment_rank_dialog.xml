@@ -16,25 +16,14 @@
         android:layout_margin="@dimen/padding_middle"
         android:orientation="vertical">
 
-        <com.google.android.material.circularreveal.CircularRevealFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_large"
-                android:text="基金类型"
-                android:textColor="@color/design_default_color_primary"
-                android:textStyle="bold" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_large"
+            android:text="基金类型"
+            android:textStyle="bold" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="submit" />
-        </com.google.android.material.circularreveal.CircularRevealFrameLayout>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/mTypeGroup"
@@ -96,7 +85,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_large"
             android:text="排序"
-            android:textColor="@color/design_default_color_primary"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.ChipGroup
@@ -187,7 +175,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_large"
             android:text="基金公司"
-            android:textColor="@color/design_default_color_primary"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.ChipGroup
@@ -195,8 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            app:checkedChip="@+id/sort1"
-            >
+            app:checkedChip="@+id/sort1">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/c1"
@@ -279,6 +265,13 @@
                 android:text="汇添富" />
 
         </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="submit" />
 
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
