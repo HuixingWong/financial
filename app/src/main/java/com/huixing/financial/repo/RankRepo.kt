@@ -6,6 +6,7 @@ import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -14,9 +15,16 @@ class RankRepo @Inject constructor(
 ) {
 
     suspend  fun fetchRankData(rankParam: RankParam, onError: (String) -> Unit) = flow {
-        financialService.fetchRankData(rankParam).suspendOnSuccess {
+        val moshi = Moshi.Builder().build()
+        val adapter = moshi.adapter(RankParam::class.java)
+        val paramString = adapter.toJson(rankParam)
+        financialService.fetchRankData(paramString).suspendOnSuccess {
             data.whatIfNotNull {
-                emit(it)
+                if (it.code == 200){
+                    emit(it)
+                } else {
+                    onError(it.message.toString())
+                }
             }
         }.onError {
             onError(message())

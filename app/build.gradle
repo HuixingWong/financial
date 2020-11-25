@@ -88,6 +88,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$versions.roomVersion"
     testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
 
@@ -109,6 +110,7 @@ dependencies {
     implementation "com.github.skydoves:sandwich:$versions.sandwichVersion"
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$versions.scalars"
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttpVersion"
 
