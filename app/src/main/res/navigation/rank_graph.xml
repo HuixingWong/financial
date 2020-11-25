@@ -10,7 +10,16 @@
         android:id="@+id/rankFragment"
         android:name="com.huixing.financial.ui.rank.RankFragment"
         android:label="fragment_rank"
-        tools:layout="@layout/fragment_rank" />
+        tools:layout="@layout/fragment_rank" >
+        <action
+            android:id="@+id/action_rankFragment_to_rankDialogFragment"
+            app:destination="@id/rankDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/rankDialogFragment"
+        android:name="com.huixing.financial.ui.rank.RankDialogFragment"
+        android:label="rankDialogFragment"
+        tools:layout="@layout/fragment_rank_dialog" />
 
 
 </navigation>

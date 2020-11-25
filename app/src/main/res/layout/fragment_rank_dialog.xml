@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.huixing.financial.ui.rank.RankViewModel" />
+    </data>
+
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/padding_middle"
+        android:orientation="vertical">
+
+        <com.google.android.material.circularreveal.CircularRevealFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_large"
+                android:text="基金类型"
+                android:textColor="@color/design_default_color_primary"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="submit" />
+        </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/mTypeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/t1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="gp"
+                android:text="股票型" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/t2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="hh"
+                android:text="混合型" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/t3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="zq"
+                android:text="债券型" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/t4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="zs"
+                android:text="指数型" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/t5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="qdii"
+                android:text="QDII" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/t6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="fof"
+                android:text="FOF" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_large"
+            android:text="排序"
+            android:textColor="@color/design_default_color_primary"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/mSortGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            app:checkedChip="@+id/sort1"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="r"
+                android:text="日涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="z"
+                android:text="周涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="1y"
+                android:text="最近一个月涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="3y"
+                android:text="最近三个月涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="6y"
+                android:text="最近六个月涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="jn"
+                android:text="今年涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="1n"
+                android:text="近一年涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="2n"
+                android:text="近两年涨幅" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sort9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="3n"
+                android:text="近三年涨幅" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+</layout>
