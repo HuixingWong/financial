@@ -39,6 +39,15 @@ class RankDialogFragment : DataBindingDialogFragment<FragmentRankDialogBindingIm
                 }
             }
         }
+        mCompanyGroup?.forEach {
+            (it as? Chip)?.apply {
+                if (tag != null &&
+                    rankViewModel.rankParam.fundCompany?.contains(tag) == true
+                ) {
+                    isChecked = true
+                }
+            }
+        }
         mSortGroup?.forEach {
             (it as? Chip)?.apply {
                 if (tag != null &&
@@ -57,7 +66,14 @@ class RankDialogFragment : DataBindingDialogFragment<FragmentRankDialogBindingIm
                 typeList.add(type)
             }
         }
+        val companyList = mutableListOf<String>()
+        mCompanyGroup.checkedChipIds.forEach {
+            (view?.findViewById<Chip>(it)?.tag as? String)?.let { comp ->
+                companyList.add(comp)
+            }
+        }
         rankViewModel.rankParam.fundType = typeList
+        rankViewModel.rankParam.fundCompany = companyList
         rankViewModel.rankParam.sort = view?.findViewById<Chip>(
             mSortGroup.checkedChipId
         )?.tag as? String

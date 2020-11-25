@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 data class RankParam(
     var fundType: List<String>? = null,
     var sort: String? = null,
-    var fundCompany: String? = null,
+    var fundCompany: List<String>? = null,
     var creatTimeLimit:Long? = null,
     var fundScale: Int? = null,
     var asc: Int? = null,

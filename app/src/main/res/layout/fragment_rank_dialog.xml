@@ -181,6 +181,105 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_large"
+            android:text="基金公司"
+            android:textColor="@color/design_default_color_primary"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/mCompanyGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            app:checkedChip="@+id/sort1"
+            >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000222"
+                android:text="华夏" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000223"
+                android:text="嘉实" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000229"
+                android:text="易方达" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000220"
+                android:text="南方" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80048752"
+                android:text="中银" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000248"
+                android:text="广发" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80064225"
+                android:text="工银" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000226"
+                android:text="博时" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80000228"
+                android:text="华安" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/c10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:tag="80053708"
+                android:text="汇添富" />
+
+        </com.google.android.material.chip.ChipGroup>
+
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
 </layout>
