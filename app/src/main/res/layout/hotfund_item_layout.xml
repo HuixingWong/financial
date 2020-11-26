@@ -50,11 +50,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="日涨幅" />
+                    android:text="日涨幅:  " />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    bindNumberColor="@{fund.dayGrowth}"
                     android:text="@{fund.dayGrowth}" />
             </LinearLayout>
 
@@ -67,11 +68,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="周涨幅" />
+                    android:text="周涨幅:  " />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    bindNumberColor="@{fund.lastWeekGrowth}"
                     android:text="@{fund.lastWeekGrowth}" />
             </LinearLayout>
 

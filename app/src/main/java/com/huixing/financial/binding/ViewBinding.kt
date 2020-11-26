@@ -2,10 +2,13 @@ package com.huixing.financial.binding
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
+import com.huixing.financial.R
+import com.huixing.financial.R.color.f_green
 import com.huixing.financial.utils.TimeUtil
 import com.huixing.financial.utils.toDate
 import com.skydoves.whatif.whatIfNotNullOrEmpty
@@ -47,4 +50,22 @@ object ViewBinding {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("bindCodeColor")
+    fun bindColor(view: View, color: String?) {
+        color.whatIfNotNullOrEmpty {
+            view.setBackgroundColor(Color.parseColor("#$color"))
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindNumberColor")
+    fun bindColor(view: TextView, number: String?) {
+        number.whatIfNotNullOrEmpty {
+            number?.toDouble()?.apply {
+                view.setTextColor(view.resources.getColor(
+                        if (this > 0) R.color.f_red else f_green, null))
+            }
+        }
+    }
 }
