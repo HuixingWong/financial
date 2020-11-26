@@ -19,10 +19,12 @@ class AnalyseRepo @Inject constructor(
 
     suspend fun analyse(ranks: List<Rank>) {
         val adapter = moshi.adapter(FundDetail::class.java)
+        val listFundDetailList = mutableListOf<FundDetail>()
         ranks.forEach {
             financialService.getFundDetail(it.code)
                     .suspendOnSuccess {
                 if (data?.code == 200) {
+                    listFundDetailList.add(data as FundDetail)
                     log(message = adapter.toJson(data))
                 }
             }
