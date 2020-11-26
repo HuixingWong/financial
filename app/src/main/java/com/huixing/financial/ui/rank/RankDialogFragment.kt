@@ -57,6 +57,8 @@ class RankDialogFragment : DataBindingDialogFragment<FragmentRankDialogBindingIm
                 }
             }
         }
+        useDesc.isChecked = rankViewModel.rankParam.asc != 0
+        dataSize.setText(rankViewModel.rankParam.pageSize.toString())
     }
 
     private fun submitData() {
@@ -75,8 +77,10 @@ class RankDialogFragment : DataBindingDialogFragment<FragmentRankDialogBindingIm
         rankViewModel.rankParam.fundType = typeList
         rankViewModel.rankParam.fundCompany = companyList
         rankViewModel.rankParam.sort = view?.findViewById<Chip>(
-            mSortGroup.checkedChipId
+                mSortGroup.checkedChipId
         )?.tag as? String
+        rankViewModel.rankParam.asc = if (useDesc.isChecked) 1 else 0
+        rankViewModel.rankParam.pageSize = dataSize.text.toString().toInt()
         rankViewModel.fetchRankData()
     }
 

@@ -7,14 +7,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingFragment
+import com.huixing.financial.base.viewmodel.SharedViewModel
 import com.huixing.financial.databinding.FragmentRankBinding
 import com.huixing.financial.ui.adapter.HotFundAdapter
+import com.huixing.financial.utils.appViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RankFragment : DataBindingFragment<FragmentRankBinding>(R.layout.fragment_rank) {
 
     private val rankViewModel: RankViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by appViewModels()
 
     override fun bind() {
         binding?.apply {
@@ -46,7 +49,9 @@ class RankFragment : DataBindingFragment<FragmentRankBinding>(R.layout.fragment_
     }
 
     private fun runAnalyse() {
-
+        rankViewModel.rankData.value?.data?.rank?.let {
+            sharedViewModel.analyseRankData(it)
+        }
     }
 
 }

@@ -21,7 +21,7 @@ class HotFundAdapter : RecyclerView.Adapter<HotFundAdapter.HotFundViewHolder>() 
             )
         return HotFundViewHolder(binding).apply {
             binding.root.setOnClickListener {
-                items[adapterPosition].code?.let { it1 ->
+                items[adapterPosition].code.let { it1 ->
                     FundDetailActivity.startActivity(it, it1)
                 }
             }

@@ -20,7 +20,7 @@ data class Data(
 
 @JsonClass(generateAdapter = true)
 data class Rank(
-    val code: String?,
+    val code: String,
     val dayGrowth: String?,
     val expectGrowth: String?,
     val expectWorth: Double?,
