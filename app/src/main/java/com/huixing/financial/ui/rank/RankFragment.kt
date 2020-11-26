@@ -2,6 +2,7 @@ package com.huixing.financial.ui.rank
 
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.huixing.financial.R
@@ -27,13 +28,25 @@ class RankFragment : DataBindingFragment<FragmentRankBinding>(R.layout.fragment_
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater)
         menuInflater.inflate(R.menu.rank_menu, menu)
-        menu.findItem(R.id.rankFilter).setOnMenuItemClickListener {
-            view?.let { it1 ->
-                Navigation.findNavController(it1)
-                    .navigate(R.id.action_rankFragment_to_rankDialogFragment)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.rankFilter -> {
+                view?.let { it1 ->
+                    Navigation.findNavController(it1)
+                            .navigate(R.id.action_rankFragment_to_rankDialogFragment)
+                }
             }
-            return@setOnMenuItemClickListener false
+            R.id.analyse -> {
+                runAnalyse()
+            }
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun runAnalyse() {
+
     }
 
 }
