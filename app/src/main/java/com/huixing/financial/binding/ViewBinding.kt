@@ -63,9 +63,12 @@ object ViewBinding {
     fun bindColor(view: TextView, number: String?) {
         number.whatIfNotNullOrEmpty {
             number?.toDouble()?.apply {
+                view.text = number
                 view.setTextColor(view.resources.getColor(
                         if (this > 0) R.color.f_red else f_green, null))
+                return
             }
         }
+        view.text = "暂无数据"
     }
 }

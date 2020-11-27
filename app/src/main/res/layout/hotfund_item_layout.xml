@@ -41,11 +41,14 @@
                     android:text="@{fund.code}" />
             </LinearLayout>
 
-            <LinearLayout
+            <com.google.android.material.chip.ChipGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginRight="50dp"
                 android:orientation="horizontal"
-                android:paddingVertical="@dimen/padding_small">
+                android:paddingVertical="@dimen/padding_small"
+                app:chipSpacingVertical="@dimen/padding_middle">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,17 +56,10 @@
                     android:text="日涨幅:  " />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     bindNumberColor="@{fund.dayGrowth}"
-                    android:text="@{fund.dayGrowth}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="@dimen/padding_small">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -71,11 +67,67 @@
                     android:text="周涨幅:  " />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     bindNumberColor="@{fund.lastWeekGrowth}"
-                    android:text="@{fund.lastWeekGrowth}" />
-            </LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月涨幅:  " />
+
+                <TextView
+                    bindNumberColor="@{fund.lastMonthGrowth}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="三月涨幅:  " />
+
+                <TextView
+                    bindNumberColor="@{fund.lastThreeMonthsGrowth}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="半年涨幅:  " />
+
+                <TextView
+                    bindNumberColor="@{fund.lastSixMonthsGrowth}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今年涨幅:  " />
+
+                <TextView
+                    bindNumberColor="@{fund.thisYearGrowth}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="一年内涨幅:  " />
+
+                <TextView
+                    bindNumberColor="@{fund.lastYearGrowth}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.chip.ChipGroup>
 
         </LinearLayout>
 
