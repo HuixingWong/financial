@@ -74,6 +74,9 @@ ext.versions = [
 
     nav_version          :"2.3.1",
 
+    //datastore
+    dataStore_version    :"1.0.0-alpha04",
+
     // unit test
     truthVersion         : '1.0.1',
     junitVersion         : '4.13.1',

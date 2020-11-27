@@ -1,15 +1,12 @@
 package com.huixing.financial.persistence
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.huixing.financial.model.BaseFundData
 
 @Dao
 interface FundDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertFundList(fundList: List<BaseFundData>)
 
     @Query("SELECT * FROM BaseFundData WHERE name Like '%' || :name || '%' or code Like '%' || :code || '%'")
@@ -20,5 +17,11 @@ interface FundDao {
 
     @Query("SELECT COUNT(*) FROM BaseFundData")
     suspend fun getDataCount(): Int
+
+    @Query("SELECT * FROM BaseFundData WHERE collect > 0")
+    suspend fun getCollectionFund(): List<BaseFundData>
+
+    @Update
+    suspend fun update(vararg baseFundData: BaseFundData)
 
 }

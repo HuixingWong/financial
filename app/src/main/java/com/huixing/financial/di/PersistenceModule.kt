@@ -27,10 +27,7 @@ object PersistenceModule {
     fun provideAppDatabase(
             application: Application,
     ): AppDatabase {
-        return Room
-                .databaseBuilder(application, AppDatabase::class.java, "financial.db")
-                .fallbackToDestructiveMigration()
-                .build()
+        return AppDatabase.getInstance(application)
     }
 
     @Provides

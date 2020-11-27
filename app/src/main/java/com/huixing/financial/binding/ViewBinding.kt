@@ -71,4 +71,10 @@ object ViewBinding {
         }
         view.text = "暂无数据"
     }
+
+    @JvmStatic
+    @BindingAdapter("collection")
+    fun bindClickCollection(view: View, code: String) {
+
+    }
 }

@@ -96,6 +96,9 @@ dependencies {
     // startup
     implementation "androidx.startup:startup-runtime:$versions.startupVersion"
 
+    //dataStore
+    implementation "androidx.datastore:datastore-core:$versions.dataStore_version"
+
     // hilt
     implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
     implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
