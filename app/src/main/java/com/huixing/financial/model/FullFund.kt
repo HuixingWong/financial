@@ -20,5 +20,6 @@ data class FullFund(
 data class BaseFundData(
         @PrimaryKey
         @ColumnInfo(name = "code") val code: String,
-        @ColumnInfo(name = "name") val name: String
+        @ColumnInfo(name = "name") val name: String,
+        @ColumnInfo(name = "collect") val isCollect: Boolean = false
 ) : Parcelable
