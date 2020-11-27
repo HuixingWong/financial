@@ -4,13 +4,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.huixing.financial.base.repo.ShareRepo
 import com.huixing.financial.model.BaseFundData
 import com.huixing.financial.repo.SearchRepo
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SearchViewModel @ViewModelInject constructor(
-        private val searchRepo: SearchRepo
+        private val searchRepo: SearchRepo,
+        private val shareRepo: ShareRepo
 ) : ViewModel() {
 
     val baseFundList = MutableLiveData<List<BaseFundData>>()
@@ -19,7 +21,12 @@ class SearchViewModel @ViewModelInject constructor(
 
     fun search(queryFlow: StateFlow<String>) {
         viewModelScope.launch {
-            queryFlow.onEach {
+            queryFlow.filter {
+                if (it.isBlank()){
+                    baseFundList.value = shareRepo.allFundList
+                }
+                it.isNotBlank()
+            }.onEach {
                 isLoading.postValue(true)
             }.flatMapLatest {
                 searchRepo.searchFundByKey(it)

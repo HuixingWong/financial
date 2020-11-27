@@ -19,10 +19,12 @@ class ShareRepo @Inject constructor(
         private val financialService: FinancialService,
         private val fundDao: FundDao) {
 
+    var allFundList: List<BaseFundData>? = null
 
     suspend fun getAllDataAndSave(onSuccess: () -> Unit, onError: (String) -> Unit) = flow<Boolean>{
         financialService.getAllBaseData().suspendOnSuccess {
-            if (fundDao.getAllFundList().isNotEmpty()){
+            allFundList = fundDao.getAllFundList()
+            allFundList.whatIfNotNull {
                 onSuccess()
                 return@suspendOnSuccess
             }
