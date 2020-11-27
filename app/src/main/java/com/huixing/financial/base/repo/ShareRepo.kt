@@ -19,12 +19,15 @@ class ShareRepo @Inject constructor(
         private val financialService: FinancialService,
         private val fundDao: FundDao) {
 
-    var allFundList: List<BaseFundData>? = null
+    var mAllFundList: List<BaseFundData>? = null
 
-    suspend fun getAllDataAndSave(onSuccess: () -> Unit, onError: (String) -> Unit) = flow<Boolean>{
+    suspend fun getAllDataAndSave(
+            onSuccess: () -> Unit,
+            onError: (String) -> Unit)
+            = flow {
         financialService.getAllBaseData().suspendOnSuccess {
-            allFundList = fundDao.getAllFundList()
-            allFundList.whatIfNotNull {
+            mAllFundList = fundDao.getAllFundList()
+            mAllFundList.whatIfNotNull {
                 onSuccess()
                 return@suspendOnSuccess
             }
@@ -34,6 +37,7 @@ class ShareRepo @Inject constructor(
                     allFundList.add(BaseFundData(code = baseFund[0], name = baseFund[2]))
                 }
                 fundDao.insertFundList(allFundList)
+                mAllFundList = allFundList
                 onSuccess()
                 emit(true)
             }

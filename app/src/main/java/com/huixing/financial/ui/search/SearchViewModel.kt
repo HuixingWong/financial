@@ -23,7 +23,7 @@ class SearchViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             queryFlow.filter {
                 if (it.isBlank()){
-                    baseFundList.value = shareRepo.allFundList
+                    baseFundList.value = shareRepo.mAllFundList
                 }
                 it.isNotBlank()
             }.onEach {
