@@ -12,6 +12,9 @@ interface FundDao {
     @Query("SELECT * FROM BaseFundData WHERE name Like '%' || :name || '%' or code Like '%' || :code || '%'")
     suspend fun getSearchFundList(name: String? = null, code: String? = null): List<BaseFundData>
 
+    @Query("SELECT * FROM BaseFundData WHERE code == :fundCode")
+    suspend fun getCollectionByCode(fundCode: String?): BaseFundData
+
     @Query("SELECT * FROM BaseFundData")
     suspend fun getAllFundList(): List<BaseFundData>
 

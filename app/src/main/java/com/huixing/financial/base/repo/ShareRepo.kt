@@ -20,6 +20,7 @@ class ShareRepo @Inject constructor(
         private val fundDao: FundDao) {
 
     var mAllFundList: List<BaseFundData>? = null
+    var collectionsFund : MutableSet<String> = mutableSetOf()
 
     suspend fun getAllDataAndSave(
             onSuccess: () -> Unit,
@@ -47,5 +48,36 @@ class ShareRepo @Inject constructor(
             onError(message())
         }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun getAllCollectionFund() = flow {
+        if (collectionsFund.size == 0) {
+            fundDao.getCollectionFund().forEach {
+                collectionsFund.add(it.code)
+            }
+        }
+        emit(collectionsFund)
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun saveCollection(code: String) {
+        val fund = fundDao.getCollectionByCode(code)
+        fund.isCollect = true
+        fundDao.update(fund)
+        collectionsFund.add(code)
+    }
+
+    suspend fun saveOrRemove(isSave: Boolean, code: String) {
+        if (isSave)  {
+            saveCollection(code)
+        } else {
+            removeCollection(code)
+        }
+    }
+
+    suspend fun removeCollection(code: String) {
+        val fund = fundDao.getCollectionByCode(code)
+        fund.isCollect = false
+        fundDao.update(fund)
+        collectionsFund.remove(code)
+    }
 
 }

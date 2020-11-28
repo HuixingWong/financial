@@ -11,14 +11,16 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SharedViewModel @ViewModelInject constructor(
-        private val shareRepo: ShareRepo,
-        private val analyseRepo: AnalyseRepo
-): ViewModel(){
+    private val shareRepo: ShareRepo,
+    private val analyseRepo: AnalyseRepo
+) : ViewModel() {
 
     val showSearch = MutableLiveData(false)
+    private val collectionInitSuccess = MutableLiveData(false)
 
     init {
         syncAllFundData()
+        fetchAllCollection()
     }
 
     private fun syncAllFundData() {
@@ -36,6 +38,26 @@ class SharedViewModel @ViewModelInject constructor(
     fun analyseRankData(rank: List<Rank>) {
         viewModelScope.launch {
             analyseRepo.analyse(rank)
+        }
+    }
+
+    fun addCollection(code: String) {
+        viewModelScope.launch {
+            shareRepo.saveCollection(code)
+        }
+    }
+
+    fun removeCollection(code: String) {
+        viewModelScope.launch {
+            shareRepo.removeCollection(code)
+        }
+    }
+
+    private fun fetchAllCollection() {
+        viewModelScope.launch {
+            shareRepo.getAllCollectionFund().collect {
+                collectionInitSuccess.postValue(true)
+            }
         }
     }
 
