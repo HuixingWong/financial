@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -23,9 +23,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".ui.detail.FundDetailActivity"
                 android:layout_marginTop="@dimen/padding_middle"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:context=".ui.detail.FundDetailActivity">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
@@ -41,10 +41,23 @@
                             android:id="@+id/title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
                             android:text="@{vm.fundDetailData.name}"
                             android:textSize="30dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/likeBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="@dimen/padding_small"
+                            app:isCollection="@{vm.isCollection()}"
+                            android:onClick="@{() -> vm.clickSave()}"
+                            app:layout_constraintBottom_toBottomOf="@id/title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/title"
+                            />
 
                         <TextView
                             android:id="@+id/code"
@@ -149,8 +162,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
-                            android:padding="@dimen/padding_middle"
                             android:hint="startDate"
+                            android:padding="@dimen/padding_middle"
                             android:text="@={vm.startDate}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -161,8 +174,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/padding_middle"
-                            android:padding="@dimen/padding_middle"
                             android:hint="endDate"
+                            android:padding="@dimen/padding_middle"
                             android:text="@={vm.endDate}"
                             app:layout_constraintBottom_toBottomOf="@id/startDate"
                             app:layout_constraintStart_toEndOf="@+id/startDate"
@@ -226,18 +239,17 @@
                             android:layout_height="wrap_content"
                             android:hint="投入总金额"
                             android:text="@{vm.putAllMoney}"
-                            app:layout_constraintTop_toBottomOf="@+id/switchBtn"
                             app:layout_constraintEnd_toEndOf="parent"
-                            />
+                            app:layout_constraintTop_toBottomOf="@+id/switchBtn" />
 
                         <Button
                             android:id="@+id/submit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
+                            android:enabled="@{vm.fundDetailData != null}"
                             android:onClick="@{() -> vm.submitEvaluate()}"
                             android:text="submit"
-                            android:enabled="@{vm.fundDetailData != null}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/moneyInput" />
 
@@ -249,10 +261,9 @@
                             android:layout_marginLeft="@dimen/padding_middle"
                             android:hint="Benefits evaluation"
                             android:paddingBottom="@dimen/padding_small"
-                            app:layout_constraintBottom_toBottomOf="@id/submit"
-                            app:layout_constraintStart_toEndOf="@+id/submit"
                             android:text="@={vm.resultMoney}"
-                            />
+                            app:layout_constraintBottom_toBottomOf="@id/submit"
+                            app:layout_constraintStart_toEndOf="@+id/submit" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
@@ -260,11 +271,10 @@
                             android:layout_marginLeft="20dp"
                             android:hint="Earnings ratio"
                             android:paddingBottom="@dimen/padding_small"
+                            android:text="@={vm.resultRatio}"
                             app:layout_constraintBottom_toBottomOf="@id/money"
                             app:layout_constraintStart_toEndOf="@id/money"
-                            app:layout_constraintTop_toTopOf="@id/money"
-                            android:text="@={vm.resultRatio}"
-                            />
+                            app:layout_constraintTop_toTopOf="@id/money" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

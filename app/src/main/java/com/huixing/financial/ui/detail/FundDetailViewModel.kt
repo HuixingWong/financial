@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.R
+import com.huixing.financial.base.repo.ShareRepo
 import com.huixing.financial.model.FundDetailData
 import com.huixing.financial.repo.FundDetailRepo
 import com.huixing.financial.utils.toStrDate
@@ -18,7 +19,8 @@ import java.time.LocalDate
 
 class FundDetailViewModel @AssistedInject constructor(
         private val fundDetailRepo: FundDetailRepo,
-        @Assisted private val fundCode: String
+        private val shareRepo: ShareRepo,
+        @Assisted private val fundCode: String,
 ) : ViewModel() {
 
     val fundDetailData = MutableLiveData<FundDetailData>()
@@ -41,9 +43,12 @@ class FundDetailViewModel @AssistedInject constructor(
 
     val putAllMoney: MutableLiveData<String> = MutableLiveData()
 
+    val isCollection: MutableLiveData<Boolean> = MutableLiveData()
+
 
     init {
         fetchFundDetail(fundCode)
+        isCollection.value = shareRepo.collectionsFund.contains(fundCode)
     }
 
     fun submitEvaluate() {
@@ -124,6 +129,13 @@ class FundDetailViewModel @AssistedInject constructor(
             }
         }
 
+    }
+
+    fun clickSave() {
+        isCollection.value = isCollection.value?.not()
+        viewModelScope.launch {
+            isCollection.value?.let { shareRepo.saveOrRemove(it, fundCode) }
+        }
     }
 
     @AssistedInject.Factory
