@@ -4,31 +4,31 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.huixing.financial.base.repo.ShareRepo
 import com.huixing.financial.model.FundDetail
 import com.huixing.financial.network.FinancialService
-import com.skydoves.sandwich.suspendOnSuccess
-import com.skydoves.whatif.whatIfNotNull
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 class CollectionViewModel @ViewModelInject constructor(
     val financialService: FinancialService,
-    val shareRepo: ShareRepo
-) : ViewModel()  {
-    private val collectionFundList = MutableLiveData<MutableList<FundDetail>>()
+    private val collectionRepo: CollectionRepo
+) : ViewModel() {
+    val collectionFundList = MutableLiveData<MutableList<FundDetail>>()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
+    val toastData: MutableLiveData<String> = MutableLiveData()
 
     init {
         fetchAllCollectionData()
     }
 
-    private fun fetchAllCollectionData() {
+    fun fetchAllCollectionData() {
+        isLoading.value = true
         viewModelScope.launch {
-            shareRepo.collectionsFund.forEach {
-                financialService.getFundDetail(it).suspendOnSuccess {
-                    data.whatIfNotNull { fundDetail ->
-                        collectionFundList.value?.add(fundDetail)
-                    }
-                }
+            collectionRepo.fetchAllCollectionData().onCompletion {
+                isLoading.postValue(false)
+            }.collect {
+                collectionFundList.value = it
             }
         }
     }
