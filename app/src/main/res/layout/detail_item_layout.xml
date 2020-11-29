@@ -127,7 +127,35 @@
                     android:layout_height="wrap_content"
                     />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预估涨幅:  " />
+
+                <TextView
+                    bindNumberColor="@{fund.data.expectGrowth}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="基金规模:  " />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{fund.data.fundScale}"
+                    />
+
             </com.google.android.material.chip.ChipGroup>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{fund.analysisResult}"
+                />
 
         </LinearLayout>
 

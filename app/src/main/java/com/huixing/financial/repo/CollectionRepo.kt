@@ -1,5 +1,6 @@
-package com.huixing.financial.ui.collection
+package com.huixing.financial.repo
 
+import com.huixing.financial.base.analyse.AnalyseUtil
 import com.huixing.financial.base.repo.ShareRepo
 import com.huixing.financial.model.FundDetail
 import com.huixing.financial.network.FinancialService
@@ -19,7 +20,7 @@ class CollectionRepo @Inject constructor(
         shareRepo.collectionsFund.forEach {
             financialService.getFundDetail(it).suspendOnSuccess {
                 data.whatIfNotNull { fundDetail ->
-                    fundDetailList.add(fundDetail)
+                    fundDetailList.add(AnalyseUtil.analyseSingleFundDetail(fundDetail))
                     emit(fundDetailList)
                 }
             }

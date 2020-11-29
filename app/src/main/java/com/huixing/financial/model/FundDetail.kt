@@ -7,7 +7,8 @@ data class FundDetail(
     val code: Int?,
     val `data`: FundDetailData?,
     val message: String?,
-    val meta: String?
+    val meta: String?,
+    var analysisResult: String? = null
 )
 
 @JsonClass(generateAdapter = true)
