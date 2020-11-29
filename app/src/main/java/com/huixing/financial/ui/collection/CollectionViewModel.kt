@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.FundDetail
 import com.huixing.financial.network.FinancialService
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
@@ -25,7 +26,9 @@ class CollectionViewModel @ViewModelInject constructor(
     fun fetchAllCollectionData() {
         isLoading.value = true
         viewModelScope.launch {
-            collectionRepo.fetchAllCollectionData().onCompletion {
+            collectionRepo.fetchAllCollectionData().catch {
+                toastData.postValue(it.message)
+            }.onCompletion {
                 isLoading.postValue(false)
             }.collect {
                 collectionFundList.value = it
