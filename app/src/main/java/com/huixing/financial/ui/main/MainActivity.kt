@@ -2,9 +2,12 @@ package com.huixing.financial.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
@@ -60,9 +63,18 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
         return NavigationUI.navigateUp(navController, drawer_layout)
     }
 
-
-    override fun onBackPressed() {
-        moveTaskToBack(true)
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (Navigation.findNavController(this, R.id.nav_host_fragment)
+                .currentDestination?.id == R.id.mainFragment
+        ) {
+            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                drawer_layout.closeDrawer(GravityCompat.START)
+            } else {
+                moveTaskToBack(true)
+            }
+            return false
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -70,7 +82,10 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
         drawer_layout.closeDrawers()
         when (item.itemId) {
             R.id.rankActivity -> {
-                navController.navigate(R.id.action_mainFragment_to_rankActivity)
+                navController.navigate(R.id.rankActivity)
+            }
+            R.id.collectionFragment -> {
+                navController.navigate(R.id.collectionFragment)
             }
         }
         return true
