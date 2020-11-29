@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
 
@@ -12,11 +13,19 @@
         <action
             android:id="@+id/action_mainFragment_to_rankActivity"
             app:destination="@id/rankActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_collectionFragment"
+            app:destination="@id/collectionFragment" />
     </fragment>
 
     <activity
         android:id="@+id/rankActivity"
         android:name="com.huixing.financial.ui.rank.RankActivity"
         android:label="Hilt_RankActivity" />
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.huixing.financial.ui.collection.CollectionFragment"
+        android:label="fragment_collection"
+        tools:layout="@layout/fragment_collection" />
 
 </navigation>
