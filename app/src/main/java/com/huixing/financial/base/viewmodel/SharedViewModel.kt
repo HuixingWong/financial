@@ -41,18 +41,6 @@ class SharedViewModel @ViewModelInject constructor(
         }
     }
 
-    fun addCollection(code: String) {
-        viewModelScope.launch {
-            shareRepo.saveCollection(code)
-        }
-    }
-
-    fun removeCollection(code: String) {
-        viewModelScope.launch {
-            shareRepo.removeCollection(code)
-        }
-    }
-
     private fun fetchAllCollection() {
         viewModelScope.launch {
             shareRepo.getAllCollectionFund().collect {
