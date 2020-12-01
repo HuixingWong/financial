@@ -20,6 +20,16 @@
             android:title="collection" />
     </group>
 
+    <group
+        android:id="@+id/grp_3"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/simpleCollectionFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="basic collection" />
+    </group>
+
 
 
 </menu>

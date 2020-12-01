@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_collectionFragment"
             app:destination="@id/collectionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_simpleCollectionFragment"
+            app:destination="@id/simpleCollectionFragment" />
     </fragment>
 
     <activity
@@ -27,5 +30,10 @@
         android:name="com.huixing.financial.ui.collection.CollectionFragment"
         android:label="fragment_collection"
         tools:layout="@layout/fragment_collection" />
+    <fragment
+        android:id="@+id/simpleCollectionFragment"
+        android:name="com.huixing.financial.ui.collection.SimpleCollectionFragment"
+        android:label="fragment_simple_collection"
+        tools:layout="@layout/fragment_simple_collection" />
 
 </navigation>

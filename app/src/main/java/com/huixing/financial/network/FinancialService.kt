@@ -1,13 +1,16 @@
 package com.huixing.financial.network
 
+import com.huixing.financial.model.BaseDetail
 import com.huixing.financial.model.FullFund
 import com.huixing.financial.model.FundDetail
 import com.huixing.financial.model.HotFund
-import com.huixing.financial.model.request.RankParam
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.*
 
 interface FinancialService {
+
+    @GET("/v1/fund")
+    suspend fun getBaseDetail(@Query("code") codes: String): ApiResponse<BaseDetail>
 
     @GET("v1/fund/hot")
     suspend fun getHotData(): ApiResponse<HotFund>

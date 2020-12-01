@@ -87,6 +87,9 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
             R.id.collectionFragment -> {
                 navController.navigate(R.id.collectionFragment)
             }
+            R.id.simpleCollectionFragment -> {
+                navController.navigate(R.id.simpleCollectionFragment)
+            }
         }
         return true
     }
