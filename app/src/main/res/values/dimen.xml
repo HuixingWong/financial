@@ -10,4 +10,11 @@
 
     <dimen name="app_bar_height">48dp</dimen>
 
+    <dimen name="text_small">11sp</dimen>
+    <dimen name="text_middle">14sp</dimen>
+    <dimen name="text_big">16sp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_bigger">24sp</dimen>
+
+
 </resources>
