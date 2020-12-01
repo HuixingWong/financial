@@ -2,7 +2,7 @@ package com.huixing.financial.repo
 
 import com.huixing.financial.model.request.RankParam
 import com.huixing.financial.network.FinancialService
-import com.huixing.financial.utils.moshi
+import com.huixing.financial.utils.rankParamAdapter
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.suspendOnSuccess
@@ -14,10 +14,9 @@ class RankRepo @Inject constructor(
     private val financialService: FinancialService
 ) {
 
-    private val adapter = moshi.adapter(RankParam::class.java)
     suspend fun fetchRankData(rankParam: RankParam, onError: (String) -> Unit)
             = flow {
-        val paramString = adapter.toJson(rankParam)
+        val paramString = rankParamAdapter.toJson(rankParam)
         financialService.fetchRankData(paramString).suspendOnSuccess {
             data.whatIfNotNull {
                 if (it.code == 200) {
