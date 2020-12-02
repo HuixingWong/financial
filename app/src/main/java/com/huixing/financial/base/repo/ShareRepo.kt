@@ -58,7 +58,7 @@ class ShareRepo @Inject constructor(
         emit(collectionsFund)
     }.flowOn(Dispatchers.IO)
 
-    suspend fun saveCollection(code: String) {
+    private suspend fun saveCollection(code: String) {
         val fund = fundDao.getCollectionByCode(code)
         fund.isCollect = true
         fundDao.update(fund)
@@ -73,7 +73,7 @@ class ShareRepo @Inject constructor(
         }
     }
 
-    suspend fun removeCollection(code: String) {
+    private suspend fun removeCollection(code: String) {
         val fund = fundDao.getCollectionByCode(code)
         fund.isCollect = false
         fundDao.update(fund)

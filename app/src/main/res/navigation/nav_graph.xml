@@ -10,15 +10,6 @@
         android:id="@+id/mainFragment"
         android:name="com.huixing.financial.ui.main.MainFragment"
         android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_rankActivity"
-            app:destination="@id/rankActivity" />
-        <action
-            android:id="@+id/action_mainFragment_to_collectionFragment"
-            app:destination="@id/collectionFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_simpleCollectionFragment"
-            app:destination="@id/simpleCollectionFragment" />
     </fragment>
 
     <activity

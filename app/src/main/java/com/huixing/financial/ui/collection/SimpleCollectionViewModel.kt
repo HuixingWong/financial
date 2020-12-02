@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.BaseDetail
-import com.huixing.financial.network.FinancialService
 import com.huixing.financial.repo.SimpleCollectionRepo
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 class SimpleCollectionViewModel @ViewModelInject constructor(
-    val financialService: FinancialService,
     private val simpleCollectionRepo: SimpleCollectionRepo
 ) : ViewModel() {
 
