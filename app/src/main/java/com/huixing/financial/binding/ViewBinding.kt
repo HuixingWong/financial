@@ -26,6 +26,23 @@ object ViewBinding {
     }
 
     @JvmStatic
+    @BindingAdapter("toastCamp")
+    fun bindToastCamp(view: View, needReset: Boolean) {
+        view.post {
+            // must do this after view post
+            (view as? TextView)?.text?.let {
+                if (it.isBlank()) {
+                    return@post
+                }
+                Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
+                if (needReset) {
+                    (view as? TextView)?.text = null
+                }
+            }
+        }
+    }
+
+    @JvmStatic
     @BindingAdapter("gone")
     fun bindGone(view: View, shouldBeGone: Boolean) {
         view.visibility = if (shouldBeGone) {
