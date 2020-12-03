@@ -18,14 +18,6 @@
         tools:context=".ui.main.MainActivity"
         >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="@={vm.toastData}"
-            app:toastCamp="@{true}"
-            android:visibility="gone"
-            tools:ignore="MissingConstraints" />
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

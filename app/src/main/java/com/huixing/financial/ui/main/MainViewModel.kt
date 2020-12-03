@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.HotFund
 import com.huixing.financial.repo.MainRepo
+import com.huixing.financial.utils.event.SingleLiveEvent
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -15,7 +16,7 @@ class MainViewModel @ViewModelInject constructor(
 
     var hotFundData = MutableLiveData<HotFund>()
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
-    val toastData: MutableLiveData<String> = MutableLiveData()
+    val toastData: SingleLiveEvent<String> = SingleLiveEvent()
 
     init {
         fetchHotData()

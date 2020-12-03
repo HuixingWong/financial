@@ -1,5 +1,6 @@
 package com.huixing.financial.ui.main
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingFragment
@@ -17,6 +18,9 @@ class MainFragment: DataBindingFragment<FragmentMainBinding>(R.layout.fragment_m
             lifecycleOwner = this@MainFragment
             adapter = HotFundAdapter()
             vm = viewModel
+        }
+        viewModel.toastData.observe(this) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }
     }
 
