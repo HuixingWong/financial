@@ -5,6 +5,7 @@
     <string name="week">周</string>
     <string name="month">月</string>
     <string name="year">年</string>
+    <string name="net_work_broken">网络连接❌错误</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

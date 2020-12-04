@@ -25,7 +25,9 @@ class CollectionViewModel @ViewModelInject constructor(
     fun fetchAllCollectionData() {
         isLoading.value = true
         viewModelScope.launch {
-            collectionRepo.fetchAllCollectionData().catch {
+            collectionRepo.fetchAllCollectionData {
+                toastData.postValue(it)
+            }.catch {
                 toastData.postValue(it.message)
             }.onCompletion {
                 isLoading.postValue(false)

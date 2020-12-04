@@ -1,10 +1,13 @@
 package com.huixing.financial.repo
 
+import com.huixing.financial.R
+import com.huixing.financial.base.App
 import com.huixing.financial.model.request.RankParam
 import com.huixing.financial.network.FinancialService
 import com.huixing.financial.utils.rankParamAdapter
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
 import kotlinx.coroutines.flow.flow
@@ -27,6 +30,8 @@ class RankRepo @Inject constructor(
             }
         }.onError {
             onError(message())
+        }.onException {
+            onError(App.context.getString(R.string.net_work_broken))
         }
     }
 
