@@ -14,34 +14,36 @@ import com.google.android.material.navigation.NavigationView
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingActivity
 import com.huixing.financial.base.viewmodel.SharedViewModel
+import com.huixing.financial.databinding.ActivityMainBinding
 import com.huixing.financial.ui.search.SearchFundActivity
 import com.huixing.financial.utils.appViewModels
+import com.huixing.financial.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val sharedViewModel: SharedViewModel by appViewModels()
     lateinit var navController: NavController
+    private val binding by viewBinding(ActivityMainBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         setupActionBar()
     }
 
 
     private fun setupActionBar() {
-        setSupportActionBar(mToolbar)
+        setSupportActionBar(binding.mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        NavigationUI.setupActionBarWithNavController(this, navController, drawer_layout)
-        NavigationUI.setupWithNavController(nav_view, navController)
-        nav_view.setNavigationItemSelectedListener(this)
+        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
+        binding.navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,15 +62,15 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
 
     //this enable drawer and close
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, drawer_layout)
+        return NavigationUI.navigateUp(navController, binding.drawerLayout)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (Navigation.findNavController(this, R.id.nav_host_fragment)
                 .currentDestination?.id == R.id.mainFragment
         ) {
-            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-                drawer_layout.closeDrawer(GravityCompat.START)
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
             } else {
                 moveTaskToBack(true)
             }
@@ -79,7 +81,7 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         item.isChecked = true
-        drawer_layout.closeDrawers()
+        binding.drawerLayout.closeDrawers()
         when (item.itemId) {
             R.id.rankActivity -> {
                 navController.navigate(R.id.rankActivity)
