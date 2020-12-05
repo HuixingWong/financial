@@ -31,7 +31,7 @@ class CollectionRepo @Inject constructor(
             }.onError {
                 onError(message())
             }.onException {
-                onError(App.context.getString(R.string.net_work_broken))
+                onError(App.context.getString(R.string.connection_error))
             }
         }
     }.flowOn(Dispatchers.IO)

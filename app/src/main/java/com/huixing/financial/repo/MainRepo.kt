@@ -1,5 +1,7 @@
 package com.huixing.financial.repo
 
+import com.huixing.financial.R
+import com.huixing.financial.base.App
 import com.huixing.financial.network.FinancialService
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
@@ -26,7 +28,7 @@ class MainRepo @Inject constructor(
         }.onError {
             onError(message())
         }.onException {
-            onError(message())
+            onError(App.context.getString(R.string.connection_error))
         }
     }.flowOn(Dispatchers.IO)
 }
