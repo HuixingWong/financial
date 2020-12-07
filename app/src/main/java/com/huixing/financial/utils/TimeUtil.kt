@@ -16,7 +16,6 @@ object TimeUtil {
     }
 }
 
-@SuppressLint("NewApi")
 fun String.toTimestamp(): Long {
     return try {
         val l = LocalDate.parse(this, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -26,12 +25,10 @@ fun String.toTimestamp(): Long {
     }
 }
 
-@SuppressLint("NewApi")
 fun String.toDate(): LocalDate {
     return LocalDate.parse(this, DateTimeFormatter.ISO_DATE)
 }
 
-@SuppressLint("NewApi")
 fun LocalDate.toStrDate(): String {
     return TimeUtil.getDateStr(this.year, this.month.ordinal, this.dayOfMonth)
 }

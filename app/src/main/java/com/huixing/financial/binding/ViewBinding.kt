@@ -52,7 +52,6 @@ object ViewBinding {
         }
     }
 
-    @SuppressLint("NewApi")
     @JvmStatic
     @BindingAdapter("pickDate")
     fun bindPickDate(view: View, backToView: Boolean) {
@@ -84,7 +83,7 @@ object ViewBinding {
                 view.text = number
                 view.setTextColor(
                     view.resources.getColor(
-                        if (this > 0) R.color.f_red else f_green, null
+                        if (this > 0) R.color.f_red else f_green
                     )
                 )
                 return

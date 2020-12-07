@@ -1,6 +1,5 @@
 package com.huixing.financial.repo
 
-import android.annotation.SuppressLint
 import com.huixing.financial.R
 import com.huixing.financial.network.FinancialService
 import com.huixing.financial.utils.log
@@ -47,7 +46,6 @@ class FundDetailRepo @Inject constructor(
      * this method return a pair
      * first is ratio, second is last money
      */
-    @SuppressLint("NewApi")
     suspend fun calculateByPlan(
             id: Int,
             startDate: String,
@@ -74,7 +72,6 @@ class FundDetailRepo @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    @SuppressLint("NewApi")
     fun getNextRatio(id: Int): Double? {
 
         val valueStart = getAvailableDateLatest(mCurrentDate)
@@ -102,7 +99,6 @@ class FundDetailRepo @Inject constructor(
         }
     }
 
-    @SuppressLint("NewApi")
     fun getAvailableDateLatest(currentDate: String): String? {
         var available = currentDate
         while (!fundMap.containsKey(available)) {
@@ -122,7 +118,6 @@ class FundDetailRepo @Inject constructor(
         return fundMap[available]
     }
 
-    @SuppressLint("NewApi")
     fun getBeforeDayUntilAvailable(currentDate: String): String {
         var date = currentDate
         while (!fundMap.containsKey(date)) {

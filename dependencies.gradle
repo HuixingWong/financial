@@ -1,6 +1,6 @@
 
 ext.versions = [
-    minSdk               : 26,
+    minSdk               : 21,
     compileSdk           : 30,
     versionCode          : 3,
     versionName          : '1.0.2',
@@ -76,6 +76,9 @@ ext.versions = [
 
     //datastore
     dataStore_version    :"1.0.0-alpha05",
+
+    //java8
+    desugar              : "1.1.1",
 
     // unit test
     truthVersion         : '1.0.1',

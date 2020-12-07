@@ -30,6 +30,8 @@ android {
         buildConfigField "String", "ACCESS_TOKEN", properties.getProperty("ACCESS_TOKEN")
     }
     compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -160,6 +162,8 @@ dependencies {
     // Feature module Support
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$versions.nav_version"
 
+    //java new api
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$versions.desugar"
 
     // unit test
     testImplementation "junit:junit:$versions.junitVersion"
