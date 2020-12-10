@@ -19,7 +19,7 @@ class MainFragment: DataBindingFragment<FragmentMainBinding>(R.layout.fragment_m
             adapter = HotFundAdapter()
             vm = viewModel
         }
-        viewModel.toastData.observe(this) {
+        viewModel.toastData.observe(viewLifecycleOwner) {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }
     }
