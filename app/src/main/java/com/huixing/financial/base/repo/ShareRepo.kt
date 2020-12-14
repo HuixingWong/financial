@@ -8,6 +8,7 @@ import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
+import com.skydoves.whatif.whatIfNotNullOrEmpty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -26,12 +27,12 @@ class ShareRepo @Inject constructor(
             onSuccess: () -> Unit,
             onError: (String) -> Unit)
             = flow {
+        mAllFundList = fundDao.getAllFundList()
+        mAllFundList.whatIfNotNullOrEmpty {
+            onSuccess()
+            return@flow
+        }
         financialService.getAllBaseData().suspendOnSuccess {
-            mAllFundList = fundDao.getAllFundList()
-            mAllFundList.whatIfNotNull {
-                onSuccess()
-                return@suspendOnSuccess
-            }
             data?.data.whatIfNotNull {
                 val allFundList = mutableListOf<BaseFundData>()
                 it.forEach { baseFund ->
