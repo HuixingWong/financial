@@ -176,4 +176,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
     androidTestImplementation "com.android.support.test:runner:$versions.androidTestRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
+    testImplementation 'org.assertj:assertj-core:3.11.1'
 }
