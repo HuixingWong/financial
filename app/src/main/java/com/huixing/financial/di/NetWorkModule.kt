@@ -1,5 +1,8 @@
 package com.huixing.financial.di
 
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.huixing.financial.base.App.Companion.context
 import com.huixing.financial.network.FinancialService
 import com.huixing.financial.network.HttpRequestInterceptor
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
@@ -22,6 +25,14 @@ object NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpRequestInterceptor())
+            .addInterceptor(
+                ChuckerInterceptor.Builder(context = context)
+                    .collector(ChuckerCollector(context))
+                    .maxContentLength(250000L)
+                    .redactHeaders(emptySet())
+                    .alwaysReadResponseBody(false)
+                    .build()
+            )
             .build()
     }
 
