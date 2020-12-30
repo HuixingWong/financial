@@ -1,8 +1,9 @@
 package com.huixing.financial.model
 
+import android.os.Parcelable
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Parcelize
 @JsonClass(generateAdapter = true)
@@ -11,7 +12,7 @@ data class BaseDetail(
         val `data`: @RawValue List<Data>?,
         val message: String?,
         val meta: String?
-) {
+) : Parcelable {
     @Parcelize
     @JsonClass(generateAdapter = true)
     data class Data(
@@ -28,5 +29,5 @@ data class BaseDetail(
             val name: String?,
             val netWorth: Double?,
             val netWorthDate: String?
-    )
+    ) : Parcelable
 }
