@@ -1,7 +1,9 @@
 package com.huixing.financial.ui.collection
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.BaseDetail
@@ -12,10 +14,11 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 class SimpleCollectionViewModel @ViewModelInject constructor(
-    private val simpleCollectionRepo: SimpleCollectionRepo
+    private val simpleCollectionRepo: SimpleCollectionRepo,
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    val collectionFundData = MutableLiveData<BaseDetail>()
+    val collectionFundData = savedStateHandle.getLiveData<BaseDetail>("collection_data")
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val toastData: MutableLiveData<String> = MutableLiveData()
 
@@ -33,7 +36,7 @@ class SimpleCollectionViewModel @ViewModelInject constructor(
             }.onCompletion {
                 isLoading.postValue(false)
             }.collect {
-                collectionFundData.value = it
+                savedStateHandle.set("collection_data", it)
             }
         }
     }
