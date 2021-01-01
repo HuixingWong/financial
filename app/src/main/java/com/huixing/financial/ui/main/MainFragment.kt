@@ -2,6 +2,7 @@ package com.huixing.financial.ui.main
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingFragment
 import com.huixing.financial.databinding.FragmentMainBinding
@@ -16,7 +17,10 @@ class MainFragment: DataBindingFragment<FragmentMainBinding>(R.layout.fragment_m
     override fun bind() {
         binding?.apply {
             lifecycleOwner = this@MainFragment
-            adapter = HotFundAdapter()
+            adapter = HotFundAdapter().apply {
+                stateRestorationPolicy =
+                        RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            }
             vm = viewModel
         }
         viewModel.toastData.observe(viewLifecycleOwner) {
