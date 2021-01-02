@@ -82,17 +82,7 @@ class MainActivity : DataBindingActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         item.isChecked = true
         binding.drawerLayout.closeDrawers()
-        when (item.itemId) {
-            R.id.rankActivity -> {
-                navController.navigate(R.id.rankActivity)
-            }
-            R.id.collectionFragment -> {
-                navController.navigate(R.id.collectionFragment)
-            }
-            R.id.simpleCollectionFragment -> {
-                navController.navigate(R.id.simpleCollectionFragment)
-            }
-        }
+        navController.navigate(item.itemId)
         return true
     }
 
