@@ -25,6 +25,7 @@
             app:refreshing="@{vm.isLoading}"
             >
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mainRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"

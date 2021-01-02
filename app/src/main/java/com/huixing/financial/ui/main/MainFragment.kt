@@ -2,11 +2,11 @@ package com.huixing.financial.ui.main
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.huixing.financial.R
 import com.huixing.financial.base.DataBindingFragment
 import com.huixing.financial.databinding.FragmentMainBinding
 import com.huixing.financial.ui.adapter.HotFundAdapter
+import com.huixing.financial.utils.detectState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,10 +18,13 @@ class MainFragment: DataBindingFragment<FragmentMainBinding>(R.layout.fragment_m
         binding?.apply {
             lifecycleOwner = this@MainFragment
             adapter = HotFundAdapter().apply {
-                stateRestorationPolicy =
-                        RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+                stateRestorationPolicy
             }
             vm = viewModel
+            mainRecyclerView.scrollToPosition(viewModel.firstVisibleItemPosition)
+            mainRecyclerView.detectState {  position ->
+                viewModel.saveState(position)
+            }
         }
         viewModel.toastData.observe(viewLifecycleOwner) {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
