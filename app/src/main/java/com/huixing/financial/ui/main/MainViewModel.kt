@@ -17,14 +17,14 @@ class MainViewModel @ViewModelInject constructor(
     var hotFundData = MutableLiveData<HotFund>()
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val toastData: SingleLiveEvent<String> = SingleLiveEvent()
-    var firstVisibleItemPosition: Int = 0
+    var scrollPosition: Int = 0
 
     init {
         fetchHotData()
     }
 
     fun saveState(position: Int){
-        firstVisibleItemPosition = position
+        scrollPosition = position
     }
 
     fun fetchHotData() {

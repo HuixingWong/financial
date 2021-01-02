@@ -7,6 +7,7 @@ import com.huixing.financial.base.DataBindingFragment
 import com.huixing.financial.databinding.FragmentMainBinding
 import com.huixing.financial.ui.adapter.HotFundAdapter
 import com.huixing.financial.utils.detectState
+import com.huixing.financial.utils.resumePosition
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +22,7 @@ class MainFragment: DataBindingFragment<FragmentMainBinding>(R.layout.fragment_m
                 stateRestorationPolicy
             }
             vm = viewModel
-            mainRecyclerView.scrollToPosition(viewModel.firstVisibleItemPosition)
+            mainRecyclerView.resumePosition(viewModel.scrollPosition)
             mainRecyclerView.detectState {  position ->
                 viewModel.saveState(position)
             }
