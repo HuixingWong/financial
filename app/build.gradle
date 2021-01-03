@@ -180,4 +180,6 @@ dependencies {
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.4.0"
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+
+    implementation 'com.drakeet.drawer:drawer:0.9.0'
 }
