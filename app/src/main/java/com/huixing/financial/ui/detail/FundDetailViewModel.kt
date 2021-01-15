@@ -9,8 +9,8 @@ import com.huixing.financial.base.repo.ShareRepo
 import com.huixing.financial.model.FundDetailData
 import com.huixing.financial.repo.FundDetailRepo
 import com.huixing.financial.utils.toStrDate
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
@@ -18,9 +18,9 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class FundDetailViewModel @AssistedInject constructor(
-        private val fundDetailRepo: FundDetailRepo,
-        private val shareRepo: ShareRepo,
-        @Assisted private val fundCode: String,
+    private val fundDetailRepo: FundDetailRepo,
+    private val shareRepo: ShareRepo,
+    @Assisted private val fundCode: String,
 ) : ViewModel() {
 
     val fundDetailData = MutableLiveData<FundDetailData>()
@@ -138,7 +138,7 @@ class FundDetailViewModel @AssistedInject constructor(
         }
     }
 
-    @AssistedInject.Factory
+    @dagger.assisted.AssistedFactory
     interface AssistedFactory {
         fun create(fundCode: String): FundDetailViewModel
     }
