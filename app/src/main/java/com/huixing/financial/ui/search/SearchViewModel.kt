@@ -1,16 +1,18 @@
 package com.huixing.financial.ui.search
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.base.repo.ShareRepo
 import com.huixing.financial.model.BaseFundData
 import com.huixing.financial.repo.SearchRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
         private val searchRepo: SearchRepo,
         private val shareRepo: ShareRepo
 ) : ViewModel() {

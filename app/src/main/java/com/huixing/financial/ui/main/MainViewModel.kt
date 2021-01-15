@@ -1,16 +1,18 @@
 package com.huixing.financial.ui.main
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.HotFund
 import com.huixing.financial.repo.MainRepo
 import com.huixing.financial.utils.event.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val mainRepo: MainRepo
 ) : ViewModel() {
 

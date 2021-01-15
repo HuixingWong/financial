@@ -1,17 +1,19 @@
 package com.huixing.financial.ui.collection
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.FundDetail
 import com.huixing.financial.repo.CollectionRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CollectionViewModel @ViewModelInject constructor(
+@HiltViewModel
+class CollectionViewModel @Inject constructor(
     private val collectionRepo: CollectionRepo
 ) : ViewModel() {
     val collectionFundList = MutableLiveData<MutableList<FundDetail>>()
