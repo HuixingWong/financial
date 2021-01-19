@@ -1,3 +1,7 @@
+## financial
+-  android, kotlin, mvvm, jetPack, fundData
+-  This is a small project of fund data
+
 ## Tech stack & Open-source libraries
 - This project structure is based on skyDoves [pokedex](https://github.com/skydoves/Pokedex)
 - Minimum SDK level 21
