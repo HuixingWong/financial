@@ -20,7 +20,7 @@ ext.versions = [
     // architecture components
     fragmentVersion      : '1.2.5',
     lifecycleVersion     : '2.2.0',
-    roomVersion          : '2.3.0-alpha03',
+    roomVersion          : '2.3.0-alpha04',
     archCompomentVersion : '2.1.0',
 
     // startup
@@ -33,8 +33,8 @@ ext.versions = [
     // network
     retrofitVersion      : '2.9.0',
     okhttpVersion        : '4.9.0',
-    sandwichVersion      : '1.0.6',
-    scalars              : '2.8.1',
+    sandwichVersion      : '1.0.8',
+    scalars              : '2.9.0',
 
     // moshi
     moshiVersion         : '1.11.0',
@@ -54,7 +54,7 @@ ext.versions = [
     baseAdapter          : '0.1.3',
 
     // whatIf
-    whatIfVersion        : '1.0.8',
+    whatIfVersion        : '1.0.9',
 
     // android ribbon
     androidRibbonVersion : '1.0.3',
