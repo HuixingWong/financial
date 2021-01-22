@@ -41,7 +41,7 @@ ext.versions = [
     moshiConverterVersion: '2.7.2',
 
     // coroutines
-    coroutinesVersion    : '1.4.0',
+    coroutinesVersion    : '1.4.2',
 
     // glide
     glideVersion         : '4.11.0',
