@@ -285,9 +285,10 @@
             </LinearLayout>
 
             <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="@dimen/progress_size"
+                android:layout_height="@dimen/progress_size"
+                android:layout_marginTop="@dimen/progress_top_margin"
+                android:layout_gravity="center|top"
                 app:gone="@{!vm.loading}" />
         </FrameLayout>
 

@@ -16,5 +16,7 @@
     <dimen name="text_large">20sp</dimen>
     <dimen name="text_bigger">24sp</dimen>
 
+    <dimen name="progress_size">30dp</dimen>
+    <dimen name="progress_top_margin">30dp</dimen>
 
 </resources>
