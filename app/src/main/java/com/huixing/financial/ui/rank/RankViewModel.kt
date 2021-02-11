@@ -28,6 +28,21 @@ class RankViewModel @Inject constructor(
         fetchRankData()
     }
 
+    fun submit(
+            typeList: MutableList<String>,
+            companyList: MutableList<String>,
+            sort: String?, asc: Int, pageSize: Int
+    ) {
+        rankParam.apply {
+            fundType = typeList
+            fundCompany = companyList
+            this.sort = sort
+            this.asc = asc
+            this.pageSize = pageSize
+        }
+        fetchRankData()
+    }
+
     fun fetchRankData() {
         viewModelScope.launch {
             loading.value = true

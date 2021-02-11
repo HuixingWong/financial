@@ -73,15 +73,13 @@ class RankDialogFragment : DataBindingDialogFragment<FragmentRankDialogBinding>(
         binding?.mCompanyGroup?.checkedChipIds?.forEach {
             (view?.findViewById<Chip>(it)?.tag as? String)?.let { comp -> companyList.add(comp) }
         }
-        rankViewModel.rankParam.fundType = typeList
-        rankViewModel.rankParam.fundCompany = companyList
-        rankViewModel.rankParam.sort =
-                binding?.mSortGroup?.checkedChipId?.let {
-                    view?.findViewById<Chip>(it)?.tag
-                } as? String
-        rankViewModel.rankParam.asc = if (binding?.useDesc?.isChecked == true) 1 else 0
-        rankViewModel.rankParam.pageSize = binding?.dataSize?.text.toString().toInt()
-        rankViewModel.fetchRankData()
+        val sort =  binding?.mSortGroup?.checkedChipId?.let {
+            view?.findViewById<Chip>(it)?.tag
+        } as? String
+        val asc = if (binding?.useDesc?.isChecked == true) 1 else 0
+        val pageSize = binding?.dataSize?.text.toString().toInt()
+
+        rankViewModel.submit(typeList, companyList, sort, asc, pageSize)
     }
 
 }
