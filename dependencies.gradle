@@ -27,8 +27,10 @@ ext.versions = [
     startupVersion       : '1.0.0',
 
     // di
-    hiltCoreVersion      : '2.31-alpha',
-    hiltVersion          : '1.0.0-alpha02',
+    hiltCoreVersion     : '2.35',
+    hiltVersion         : '1.0.0-beta01',
+    hiltVersionCommon   : '1.0.0',
+    hiltVersionViewmodel: '1.0.0-alpha03',
 
     // network
     retrofitVersion      : '2.9.0',

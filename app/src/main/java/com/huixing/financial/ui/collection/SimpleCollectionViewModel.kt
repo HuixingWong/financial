@@ -1,12 +1,12 @@
 package com.huixing.financial.ui.collection
 
-import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.huixing.financial.model.BaseDetail
 import com.huixing.financial.repo.SimpleCollectionRepo
+import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SimpleCollectionViewModel @Inject constructor(
     private val simpleCollectionRepo: SimpleCollectionRepo,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     val collectionFundData = savedStateHandle.getLiveData<BaseDetail>("collection_data")
